@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import '../drawer/drawer.dart';
 import 'package:get/get.dart';
 import '../../screen/home/home.dart';
@@ -18,13 +19,51 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text('onboard'.tr),
-        centerTitle: true,
+        title: Text('dealeronboarding'.tr),
+        backgroundColor: Color.fromRGBO(227, 30, 48, 1),
+        actions: [
+          IconButton(
+            onPressed: null, //() => Navigator.of(context)
+            //.push(MaterialPageRoute(builder: (_) => SearchPage())),
+            icon: Icon(
+              CupertinoIcons.bell_fill,
+              color: Color.fromRGBO(255, 255, 255, 0.74),
+            ),
+          ),
+          // Navigate to the Search Screen
+          IconButton(
+            onPressed: null, //() => Navigator.of(context)
+            //.push(MaterialPageRoute(builder: (_) => SearchPage())),
+            icon: Icon(
+              CupertinoIcons.search,
+              color: Color.fromRGBO(255, 255, 255, 0.74),
+            ),
+          )
+        ],
       ),
       body: Container(
-        child: Row(
+        child: Column(
           children: [
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(10),
+              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.grey.shade400,
+                  ),
+                ),
+              ),
+              child: Text(
+                'Dealer Details',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24),
+                textAlign: TextAlign.left,
+              ),
+            ),
             Expanded(
               child: Stepper(
                 type: stepperType,
@@ -35,7 +74,7 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
                 onStepCancel: cancel,
                 steps: <Step>[
                   Step(
-                    title: new Text('Account'),
+                    title: new Text(''),
                     content: Column(
                       children: <Widget>[
                         TextFormField(
@@ -53,7 +92,7 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
                         : StepState.disabled,
                   ),
                   Step(
-                    title: new Text('Address'),
+                    title: new Text(''),
                     content: Column(
                       children: <Widget>[
                         TextFormField(
@@ -71,7 +110,7 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
                         : StepState.disabled,
                   ),
                   Step(
-                    title: new Text('Mobile Number'),
+                    title: new Text(''),
                     content: Column(
                       children: <Widget>[
                         TextFormField(
@@ -95,6 +134,7 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
         child: Icon(Icons.list),
         onPressed: switchStepsType,
       ),
+      drawer: const DrawerPage(),
     );
   }
 

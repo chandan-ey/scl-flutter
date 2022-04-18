@@ -8,36 +8,59 @@ class DrawerPage extends StatefulWidget {
 }
 
 class _DrawerPageState extends State<DrawerPage> {
+  Widget userHeader = UserAccountsDrawerHeader(
+    accountName: new Text(
+      'Shree Cements',
+      style: TextStyle(
+          color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+    ),
+    accountEmail: new Text(
+      'tom@xxx.com',
+      style: TextStyle(color: Colors.black),
+    ),
+    currentAccountPicture: new CircleAvatar(
+      backgroundImage: AssetImage('web/icons/user_icon.png'),
+      backgroundColor: Colors.grey[350],
+      radius: 100.0,
+    ),
+    decoration: BoxDecoration(
+      color: Colors.white,
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: ListView(
-          // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(227, 30, 48, 1),
-              ),
-              child:
-                  Text('Shree Cements', style: TextStyle(color: Colors.white)),
-            ),
+          children: <Widget>[
+            userHeader, //Custom header can be replaced here
             ListTile(
-              title: const Text('Item 1'),
+              title: Text('Item 1'),
+              leading: new CircleAvatar(
+                child: new Icon(Icons.school),
+              ),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Navigator.pop(context);
               },
             ),
             ListTile(
-              title: const Text('Item 2'),
+              title: Text('Item 2'),
+              leading: new CircleAvatar(
+                child: new Text('B2'),
+              ),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Item 3'),
+              leading: new CircleAvatar(
+                child: new Icon(Icons.list),
+              ),
+              onTap: () {
+                Navigator.pop(context);
               },
             ),
           ],

@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
             //.push(MaterialPageRoute(builder: (_) => SearchPage())),
             icon: Icon(
               CupertinoIcons.bell_fill,
-              color: Colors.white,
+              color: Color.fromRGBO(255, 255, 255, 0.74),
             ),
           ),
           // Navigate to the Search Screen
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
             //.push(MaterialPageRoute(builder: (_) => SearchPage())),
             icon: Icon(
               CupertinoIcons.search,
-              color: Colors.white,
+              color: Color.fromRGBO(255, 255, 255, 0.74),
             ),
           )
         ],

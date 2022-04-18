@@ -9,7 +9,8 @@ class LocaleString extends Translations {
           'applyfordealership': 'APPLY FOR DEALERSHIP',
           'english': 'English',
           'hindi': 'Hindi',
-          'onboard': 'Dealer Onboarding'
+          'onboard': 'Dealer Onboarding',
+          'dealeronboarding': 'Dealer Onboarding'
         },
         'hi_IN': {
           'dealerhome': 'डीलर होम',
