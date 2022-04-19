@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../drawer/drawer.dart';
 import 'package:get/get.dart';
-import '../../screen/home/home.dart';
+import '../dealeronboarding/dealerDetails.dart';
 
 class OnBoardOnePage extends StatefulWidget {
   const OnBoardOnePage({Key? key}) : super(key: key);
@@ -19,9 +19,12 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('dealeronboarding'.tr),
-        backgroundColor: Color.fromRGBO(227, 30, 48, 1),
-        actions: [
+        title: Text('dealeronboarding'.tr,
+            style: const TextStyle(
+              fontSize: 20,
+            )),
+        backgroundColor: const Color.fromRGBO(227, 30, 48, 1),
+        actions: const [
           IconButton(
             onPressed: null, //() => Navigator.of(context)
             //.push(MaterialPageRoute(builder: (_) => SearchPage())),
@@ -46,8 +49,8 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
           children: [
             Container(
               width: double.infinity,
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
@@ -55,7 +58,7 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
                   ),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 'Dealer Details',
                 style: TextStyle(
                     color: Colors.black,
@@ -67,7 +70,7 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
             Expanded(
               child: Stepper(
                 type: stepperType,
-                physics: ScrollPhysics(),
+                physics: const ScrollPhysics(),
                 currentStep: _currentStep,
                 onStepTapped: (step) => tapped(step),
                 onStepContinue: continued,
@@ -75,17 +78,7 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
                 steps: <Step>[
                   Step(
                     title: new Text(''),
-                    content: Column(
-                      children: <Widget>[
-                        TextFormField(
-                          decoration:
-                              InputDecoration(labelText: 'Email Address'),
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(labelText: 'Password'),
-                        ),
-                      ],
-                    ),
+                    content: const DealerDetails(),
                     isActive: _currentStep >= 0,
                     state: _currentStep >= 0
                         ? StepState.complete
@@ -97,10 +90,11 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
                       children: <Widget>[
                         TextFormField(
                           decoration:
-                              InputDecoration(labelText: 'Home Address'),
+                              const InputDecoration(labelText: 'Home Address'),
                         ),
                         TextFormField(
-                          decoration: InputDecoration(labelText: 'Postcode'),
+                          decoration:
+                              const InputDecoration(labelText: 'Postcode'),
                         ),
                       ],
                     ),
@@ -115,7 +109,7 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
                       children: <Widget>[
                         TextFormField(
                           decoration:
-                              InputDecoration(labelText: 'Mobile Number'),
+                              const InputDecoration(labelText: 'Mobile Number'),
                         ),
                       ],
                     ),
@@ -130,10 +124,10 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.list),
-        onPressed: switchStepsType,
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.list),
+      //   onPressed: switchStepsType,
+      // ),
       drawer: const DrawerPage(),
     );
   }
@@ -154,9 +148,9 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
 
   cancel() {
     _currentStep > 0 ? setState(() => _currentStep -= 1) : null;
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HomePage()),
-    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => HomePage()),
+    // );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../screen/home/home.dart';
 
 class DrawerPage extends StatefulWidget {
   const DrawerPage({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _DrawerPageState extends State<DrawerPage> {
       style: TextStyle(color: Colors.black),
     ),
     currentAccountPicture: new CircleAvatar(
-      backgroundImage: AssetImage('web/icons/user_icon.png'),
+      backgroundImage: AssetImage('images/user_icon.png'),
       backgroundColor: Colors.grey[350],
       radius: 100.0,
     ),
@@ -42,7 +43,10 @@ class _DrawerPageState extends State<DrawerPage> {
                 child: new Icon(Icons.school),
               ),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
               },
             ),
             ListTile(

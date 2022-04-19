@@ -17,7 +17,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('dealerhome'.tr),
+        title: Text(
+          'dealerhome'.tr,
+          style: TextStyle(
+            fontSize: 20,
+            letterSpacing: 0.15,
+          ),
+        ),
         backgroundColor: Color.fromRGBO(227, 30, 48, 1),
         actions: [
           IconButton(

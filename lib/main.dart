@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/onboardone': ((context) => const OnBoardOnePage())
       },
-      initialRoute: '/home',
+      initialRoute: '/',
     );
   }
 }
