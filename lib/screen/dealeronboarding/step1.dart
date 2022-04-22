@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import '../drawer/drawer.dart';
 import 'package:get/get.dart';
 import '../dealeronboarding/dealerDetails.dart';
+import '../dealeronboarding/companyDetails.dart';
+import '../dealeronboarding/businessDetails.dart';
+import '../dealeronboarding/financialInfo.dart';
 
 class OnBoardOnePage extends StatefulWidget {
   const OnBoardOnePage({Key? key}) : super(key: key);
@@ -22,6 +25,7 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
         title: Text('dealeronboarding'.tr,
             style: const TextStyle(
               fontSize: 20,
+              fontFamily: 'Roboto',
             )),
         backgroundColor: const Color.fromRGBO(227, 30, 48, 1),
         actions: const [
@@ -58,9 +62,9 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
                   ),
                 ),
               ),
-              child: const Text(
-                'Dealer Details',
-                style: TextStyle(
+              child: Text(
+                labelHeading,
+                style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 24),
@@ -69,6 +73,52 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
             ),
             Expanded(
               child: Stepper(
+                controlsBuilder: (BuildContext context, details) => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    TextButton(
+                      onPressed: cancel,
+                      child: const Text(
+                        'Back',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Color(0xff6D6E71)),
+                      ),
+                    ),
+                    if (_currentStep < 3)
+                      TextButton(
+                        onPressed: continued,
+                        child: const Text(
+                          'Next',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Color(0xffE31E30)),
+                        ),
+                      ),
+                    if (_currentStep == 3)
+                      TextButton(
+                        onPressed: continued,
+                        child: const Text(
+                          'Submit',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Color(0xffE31E30)),
+                        ),
+                      ),
+                  ],
+                ),
                 type: stepperType,
                 physics: const ScrollPhysics(),
                 currentStep: _currentStep,
@@ -86,18 +136,7 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
                   ),
                   Step(
                     title: new Text(''),
-                    content: Column(
-                      children: <Widget>[
-                        TextFormField(
-                          decoration:
-                              const InputDecoration(labelText: 'Home Address'),
-                        ),
-                        TextFormField(
-                          decoration:
-                              const InputDecoration(labelText: 'Postcode'),
-                        ),
-                      ],
-                    ),
+                    content: const CompanyDetails(),
                     isActive: _currentStep >= 0,
                     state: _currentStep >= 1
                         ? StepState.complete
@@ -105,16 +144,17 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
                   ),
                   Step(
                     title: new Text(''),
-                    content: Column(
-                      children: <Widget>[
-                        TextFormField(
-                          decoration:
-                              const InputDecoration(labelText: 'Mobile Number'),
-                        ),
-                      ],
-                    ),
+                    content: const BusinessDetails(),
                     isActive: _currentStep >= 0,
                     state: _currentStep >= 2
+                        ? StepState.complete
+                        : StepState.disabled,
+                  ),
+                  Step(
+                    title: new Text(''),
+                    content: const FinancialInfo(),
+                    isActive: _currentStep >= 0,
+                    state: _currentStep >= 3
                         ? StepState.complete
                         : StepState.disabled,
                   ),
@@ -124,33 +164,34 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   child: Icon(Icons.list),
-      //   onPressed: switchStepsType,
-      // ),
       drawer: const DrawerPage(),
     );
   }
 
-  switchStepsType() {
-    setState(() => stepperType == StepperType.horizontal
-        ? stepperType = StepperType.vertical
-        : stepperType = StepperType.horizontal);
-  }
-
+  String labelHeading = 'Dealer Details';
   tapped(int step) {
     setState(() => _currentStep = step);
   }
 
+  headerLabel(step) {
+    if (step == 0) {
+      labelHeading = 'Dealer Details';
+    } else if (step == 1) {
+      labelHeading = 'Company Details';
+    } else if (step == 2) {
+      labelHeading = 'Business Details';
+    } else if (step == 3) {
+      labelHeading = 'Financial Information';
+    }
+  }
+
   continued() {
-    _currentStep < 2 ? setState(() => _currentStep += 1) : null;
+    _currentStep < 3 ? setState(() => _currentStep += 1) : null;
+    headerLabel(_currentStep);
   }
 
   cancel() {
     _currentStep > 0 ? setState(() => _currentStep -= 1) : null;
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => HomePage()),
-    // );
+    headerLabel(_currentStep);
   }
 }

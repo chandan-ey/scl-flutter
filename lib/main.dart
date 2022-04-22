@@ -19,9 +19,7 @@ class MyApp extends StatelessWidget {
       locale: Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
       title: 'Shree Cements',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
+      theme: ThemeData(primarySwatch: Colors.red, fontFamily: 'Roboto'),
       routes: {
         '/': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
