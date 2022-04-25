@@ -343,12 +343,8 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                         child: TextFormField(
                           // margin: EdgeInsets.fromLTRB(0,15,0,0),
                           decoration: const InputDecoration(
-                            // floatingLabelBehavior: FloatingLabelBehavior.never,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                              ),
-                            ),
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                            border: OutlineInputBorder(),
                             labelText: 'No. of Vehicles',
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 16.0, horizontal: 10.0),
