@@ -168,7 +168,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                         child: Row(
                           children: [
                             Container(
-                                margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
                                 padding: const EdgeInsets.all(10),
                                 decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
@@ -180,11 +180,11 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                                       fontSize: 20, color: Colors.white),
                                 )),
                             const Text(
-                              'Add New line',
+                              'Add Line',
                               style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w400,
-                                  color: Colors.black),
+                                  color: Colors.grey),
                             ),
                           ],
                         ),
@@ -211,7 +211,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                   Row(
                     children: [
                       Container(
-                          margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                          margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           padding: const EdgeInsets.all(10),
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
@@ -224,9 +224,11 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                       TextButton(
                         onPressed: addItems,
                         child: const Text(
-                          'Add New line',
+                          'Add Line',
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w400),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey),
                         ),
                       ),
                     ],

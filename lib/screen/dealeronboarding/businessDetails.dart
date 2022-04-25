@@ -222,7 +222,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
             Row(
               children: [
                 Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                    margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
@@ -233,7 +233,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     )),
                 Text(
-                  'Add New line',
+                  'Add Line',
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -367,7 +367,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
             Row(
               children: [
                 Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                    margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
@@ -378,7 +378,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     )),
                 Text(
-                  'Add New line',
+                  'Add Line',
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,

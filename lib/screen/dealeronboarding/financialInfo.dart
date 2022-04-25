@@ -240,7 +240,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                       child: Row(
                         children: [
                           Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                              margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
                               padding: const EdgeInsets.all(10),
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
@@ -252,11 +252,11 @@ class _FinancialInfoState extends State<FinancialInfo> {
                                     fontSize: 20, color: Colors.white),
                               )),
                           const Text(
-                            'Add New line',
+                            'Add Line',
                             style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.black),
+                                color: Colors.grey),
                           ),
                         ],
                       ),
