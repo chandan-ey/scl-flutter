@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class CompanyDetailsDialog extends StatefulWidget {
-  const CompanyDetailsDialog({Key? key}) : super(key: key);
+class NomineeDetailsDialog extends StatefulWidget {
+  const NomineeDetailsDialog({Key? key}) : super(key: key);
   @override
-  State<CompanyDetailsDialog> createState() => _CompanyDetailsDialog();
+  State<NomineeDetailsDialog> createState() => _NomineeDetailsDialog();
 }
 
-class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
+class _NomineeDetailsDialog extends State<NomineeDetailsDialog> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
                   width: double.infinity,
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: const Text(
-                    'Director Name',
+                    'Nominee Name',
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
@@ -41,7 +41,7 @@ class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
                   style: const TextStyle(fontSize: 18.0, color: Colors.black),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter director name.';
+                      return 'Please enter Nominee Name.';
                     }
                     return null;
                   },
@@ -89,7 +89,7 @@ class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
                   width: double.infinity,
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                   child: const Text(
-                    'Address',
+                    'Relation',
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
@@ -105,7 +105,7 @@ class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
                   style: const TextStyle(fontSize: 18.0, color: Colors.black),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter address.';
+                      return 'Please enter relation.';
                     }
                     return null;
                   },
@@ -147,7 +147,7 @@ class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
                   width: double.infinity,
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                   child: const Text(
-                    'DIN No',
+                    'Aadhar No',
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
@@ -163,44 +163,12 @@ class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
                   style: const TextStyle(fontSize: 18.0, color: Colors.black),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter DIN No.';
+                      return 'Please enter Aadhar No.';
                     }
                     return null;
                   },
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                  ],
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                  child: const Text(
-                    'Banker',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    border: OutlineInputBorder(),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
-                    filled: true,
-                    fillColor: Colors.white,
-                  ),
-                  style: const TextStyle(fontSize: 18.0, color: Colors.black),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter Banker.';
-                    }
-                    return null;
-                  },
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]')),
                   ],
                 ),
               ],

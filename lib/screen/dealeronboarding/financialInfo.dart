@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
+import '../dialog/nomineeDetailsDialog.dart';
 
 class FinancialInfo extends StatefulWidget {
   const FinancialInfo({Key? key}) : super(key: key);
@@ -9,6 +8,7 @@ class FinancialInfo extends StatefulWidget {
 }
 
 class _FinancialInfoState extends State<FinancialInfo> {
+  bool checkedValue = false;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -184,7 +184,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                         width: 1,
                         color: Colors.black,
                       ),
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(4),
                     ),
                     columns: [
                       DataColumn(label: Text('Nominee Name')),
@@ -220,6 +220,66 @@ class _FinancialInfoState extends State<FinancialInfo> {
                 )),
               ],
             ),
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const AlertDialog(
+                            scrollable: true,
+                            content: const NomineeDetailsDialog(),
+                          );
+                        });
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                          margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                          padding: const EdgeInsets.all(10),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: const Color(0xffE31E30),
+                          ),
+                          child: const Text(
+                            '+',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          )),
+                      const Text(
+                        'Add New line',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Flexible(
+                  child: CheckboxListTile(
+                    title: const Text(
+                      "I have read and agree to the terms and conditions.",
+                      style: TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                    value: checkedValue,
+                    onChanged: (newValue) {
+                      setState(() {
+                        checkedValue = newValue as bool;
+                      });
+                    },
+                    controlAffinity: ListTileControlAffinity
+                        .leading, //  <-- leading Checkbox
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

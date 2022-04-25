@@ -142,9 +142,6 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                   Row(
                     children: [
                       TextButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.transparent,
-                        ),
                         onPressed: () {
                           showDialog(
                               context: context,
