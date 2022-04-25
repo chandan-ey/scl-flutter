@@ -19,6 +19,19 @@ class _CompanyDetailsState extends State<CompanyDetails> {
     return menuItems;
   }
 
+  List items = [
+    {'company': 'test1', 'partner': 'testpartner1'},
+    {'company': 'test2', 'partner': 'testpartner2'},
+    {'company': '123', 'partner': ''}
+  ];
+
+  addItems() {
+    print(items);
+    setState(() {
+      items.add({'company': '', 'partner': ''});
+    });
+  }
+
   void _changed(statusValue) {
     setState(() {
       if (statusValue == 'Company') {
@@ -182,81 +195,15 @@ class _CompanyDetailsState extends State<CompanyDetails> {
               ),
               replacement: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 180,
-                              padding: const EdgeInsets.fromLTRB(2, 14, 0, 10),
-                              child: const Text(
-                                'Company',
-                                style: TextStyle(fontSize: 20),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                            TextFormField(
-                              decoration: const InputDecoration(
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                border: OutlineInputBorder(),
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: 16.0, horizontal: 10.0),
-                                filled: true,
-                                fillColor: Colors.white,
-                              ),
-                              style: const TextStyle(
-                                  fontSize: 18.0, color: Colors.black),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter company name.';
-                                }
-                                return null;
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Flexible(
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 180,
-                              padding: const EdgeInsets.fromLTRB(2, 14, 0, 10),
-                              child: const Text(
-                                'Partnership',
-                                style: TextStyle(fontSize: 20),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                            TextFormField(
-                              decoration: const InputDecoration(
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                border: OutlineInputBorder(),
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: 16.0, horizontal: 10.0),
-                                filled: true,
-                                fillColor: Colors.white,
-                              ),
-                              style: const TextStyle(
-                                  fontSize: 18.0, color: Colors.black),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter Partnership details.';
-                                }
-                                return null;
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  Container(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        return dynamicList(
+                            items[index]['company'], items[index]['partner']);
+                      },
+                    ),
                   ),
                   const SizedBox(
                     height: 10,
@@ -274,10 +221,13 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                             '+',
                             style: TextStyle(fontSize: 20, color: Colors.white),
                           )),
-                      const Text(
-                        'Add New line',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w400),
+                      TextButton(
+                        onPressed: addItems,
+                        child: const Text(
+                          'Add New line',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ],
                   ),
@@ -287,6 +237,83 @@ class _CompanyDetailsState extends State<CompanyDetails> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget dynamicList(company, partner) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+                child: const Text(
+                  'Company',
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              TextFormField(
+                controller: TextEditingController(text: company),
+                decoration: const InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  border: OutlineInputBorder(),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter Company.';
+                  }
+                  return null;
+                },
+                style: const TextStyle(fontSize: 18.0, color: Colors.black),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Flexible(
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+                child: const Text(
+                  'Partnership',
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              TextFormField(
+                controller: TextEditingController(text: partner),
+                decoration: const InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  border: OutlineInputBorder(),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter partnership.';
+                  }
+                  return null;
+                },
+                style: const TextStyle(fontSize: 18.0, color: Colors.black),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
