@@ -47,7 +47,8 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                   ),
                 ),
                 DropdownButtonHideUnderline(
-                  child: DropdownButton2(
+                  child: DropdownButtonFormField2(
+                    decoration: const InputDecoration.collapsed(hintText: ''),
                     isExpanded: true,
                     hint: Text(
                       'Indicate Company Type',
@@ -65,6 +66,11 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                       color: Colors.white,
                     ),
                     items: dropdownItems,
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Please select company type.';
+                      }
+                    },
                     onChanged: (value) {
                       setState(() {
                         statusValue = value as String;
@@ -86,12 +92,16 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                   (SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
+                      headingRowColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.white),
+                      dataRowColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.white),
                       decoration: BoxDecoration(
                         border: Border.all(
                           width: 1,
                           color: Colors.black,
                         ),
-                        borderRadius: BorderRadius.circular(6),
+                        borderRadius: BorderRadius.circular(2),
                       ),
                       columns: const [
                         DataColumn(label: Text('Director Name')),
@@ -195,9 +205,19 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never,
                                 border: OutlineInputBorder(),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 16.0, horizontal: 10.0),
+                                filled: true,
+                                fillColor: Colors.white,
                               ),
                               style: const TextStyle(
                                   fontSize: 18.0, color: Colors.black),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter company name.';
+                                }
+                                return null;
+                              },
                             ),
                           ],
                         ),
@@ -222,9 +242,19 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never,
                                 border: OutlineInputBorder(),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 16.0, horizontal: 10.0),
+                                filled: true,
+                                fillColor: Colors.white,
                               ),
                               style: const TextStyle(
                                   fontSize: 18.0, color: Colors.black),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter Partnership details.';
+                                }
+                                return null;
+                              },
                             ),
                           ],
                         ),

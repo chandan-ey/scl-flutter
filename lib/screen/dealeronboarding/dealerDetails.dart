@@ -20,6 +20,9 @@ class _DealerDetailsState extends State<DealerDetails> {
     return menuItems;
   }
 
+  final TextEditingController _password = TextEditingController();
+  final TextEditingController _confirmPassword = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -44,6 +47,10 @@ class _DealerDetailsState extends State<DealerDetails> {
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                   style: const TextStyle(fontSize: 18.0, color: Colors.black),
                   validator: (value) {
@@ -73,6 +80,10 @@ class _DealerDetailsState extends State<DealerDetails> {
                     labelText: 'Address Line 1',
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                   style: const TextStyle(fontSize: 18.0, color: Colors.black),
                   validator: (value) {
@@ -90,6 +101,10 @@ class _DealerDetailsState extends State<DealerDetails> {
                     labelText: 'Address Line 2',
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                   style: const TextStyle(fontSize: 18.0, color: Colors.black),
                 ),
@@ -104,7 +119,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                         width: 200,
                         padding: const EdgeInsets.fromLTRB(2, 14, 0, 10),
                         child: const Text(
-                          'City',
+                          'State',
                           style: TextStyle(fontSize: 20),
                           textAlign: TextAlign.left,
                         ),
@@ -115,11 +130,11 @@ class _DealerDetailsState extends State<DealerDetails> {
                               const InputDecoration.collapsed(hintText: ''),
                           isExpanded: true,
                           hint: const Text(
-                            'Select City',
+                            'Select State',
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                             textAlign: TextAlign.left,
                           ),
-                          buttonHeight: 50,
+                          buttonHeight: 53,
                           buttonWidth: 170,
                           buttonPadding:
                               const EdgeInsets.only(left: 14, right: 14),
@@ -160,7 +175,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                         width: 200,
                         padding: const EdgeInsets.fromLTRB(2, 14, 0, 10),
                         child: const Text(
-                          'Taluka',
+                          'District',
                           style: TextStyle(fontSize: 20),
                           textAlign: TextAlign.left,
                         ),
@@ -171,12 +186,12 @@ class _DealerDetailsState extends State<DealerDetails> {
                               const InputDecoration.collapsed(hintText: ''),
                           isExpanded: true,
                           hint: Text(
-                            'Select Taluka',
+                            'Select District',
                             style: TextStyle(
                                 fontSize: 14, color: Colors.grey[500]),
                             textAlign: TextAlign.left,
                           ),
-                          buttonHeight: 50,
+                          buttonHeight: 53,
                           buttonWidth: 170,
                           buttonPadding:
                               const EdgeInsets.only(left: 14, right: 14),
@@ -218,7 +233,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                         width: 220,
                         padding: const EdgeInsets.fromLTRB(2, 14, 0, 10),
                         child: const Text(
-                          'District',
+                          'Taluka',
                           style: TextStyle(fontSize: 20),
                           textAlign: TextAlign.left,
                         ),
@@ -229,11 +244,11 @@ class _DealerDetailsState extends State<DealerDetails> {
                               const InputDecoration.collapsed(hintText: ''),
                           isExpanded: true,
                           hint: const Text(
-                            'Select District',
+                            'Select Taluka',
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                             textAlign: TextAlign.left,
                           ),
-                          buttonHeight: 50,
+                          buttonHeight: 53,
                           buttonWidth: 170,
                           buttonPadding:
                               const EdgeInsets.only(left: 14, right: 14),
@@ -274,7 +289,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                         width: 190,
                         padding: const EdgeInsets.fromLTRB(2, 14, 0, 10),
                         child: const Text(
-                          'State',
+                          'City',
                           style: TextStyle(fontSize: 20),
                           textAlign: TextAlign.left,
                         ),
@@ -285,12 +300,12 @@ class _DealerDetailsState extends State<DealerDetails> {
                               const InputDecoration.collapsed(hintText: ''),
                           isExpanded: true,
                           hint: Text(
-                            'Select State',
+                            'Select City',
                             style: TextStyle(
                                 fontSize: 14, color: Colors.grey[500]),
                             textAlign: TextAlign.left,
                           ),
-                          buttonHeight: 50,
+                          buttonHeight: 53,
                           buttonWidth: 170,
                           buttonPadding:
                               const EdgeInsets.only(left: 14, right: 14),
@@ -337,6 +352,10 @@ class _DealerDetailsState extends State<DealerDetails> {
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                   style: const TextStyle(fontSize: 18.0, color: Colors.black),
                   validator: (value) {
@@ -365,6 +384,10 @@ class _DealerDetailsState extends State<DealerDetails> {
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                   style: const TextStyle(fontSize: 18.0, color: Colors.black),
                   validator: (value) {
@@ -394,6 +417,10 @@ class _DealerDetailsState extends State<DealerDetails> {
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                   style: const TextStyle(fontSize: 18.0, color: Colors.black),
                   validator: (value) {
@@ -405,6 +432,93 @@ class _DealerDetailsState extends State<DealerDetails> {
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                   ],
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+                  child: const Text(
+                    'Referral Code (If Any)',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                  style: const TextStyle(fontSize: 18.0, color: Colors.black),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+                  child: const Text(
+                    'Password',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                TextFormField(
+                  controller: _password,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                  style: const TextStyle(fontSize: 18.0, color: Colors.black),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter Password.';
+                    }
+                    return null;
+                  },
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+                  child: const Text(
+                    'Confirm Password',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                TextFormField(
+                  controller: _confirmPassword,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                  style: const TextStyle(fontSize: 18.0, color: Colors.black),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter confirm password.';
+                    } else if (value != _password.text) {
+                      return 'Password does not Match.';
+                    }
+                    return null;
+                  },
                 ),
               ],
             ),

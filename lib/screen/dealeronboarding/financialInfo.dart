@@ -30,6 +30,10 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                   style: TextStyle(fontSize: 18.0, color: Colors.black),
                   validator: (value) {
@@ -55,6 +59,10 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                   style: TextStyle(fontSize: 18.0, color: Colors.black),
                   validator: (value) {
@@ -72,7 +80,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   width: double.infinity,
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: const Text(
-                    'Sate of Registration',
+                    'State of Registration',
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
@@ -80,6 +88,10 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                   style: TextStyle(fontSize: 18.0, color: Colors.black),
                   validator: (value) {
@@ -105,6 +117,10 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                   style: TextStyle(fontSize: 18.0, color: Colors.black),
                   validator: (value) {
@@ -130,6 +146,10 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                   style: TextStyle(fontSize: 18.0, color: Colors.black),
                   validator: (value) {
@@ -141,7 +161,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Column(
               children: [
                 Container(
@@ -155,6 +175,10 @@ class _FinancialInfoState extends State<FinancialInfo> {
                 (SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: DataTable(
+                    headingRowColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.white),
+                    dataRowColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.white),
                     decoration: BoxDecoration(
                       border: Border.all(
                         width: 1,

@@ -43,14 +43,16 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                         ),
                       ),
                       DropdownButtonHideUnderline(
-                        child: DropdownButton2(
+                        child: DropdownButtonFormField2(
+                          decoration:
+                              const InputDecoration.collapsed(hintText: ''),
                           isExpanded: true,
                           hint: const Text(
                             'Choose Brand',
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                             textAlign: TextAlign.left,
                           ),
-                          buttonHeight: 60,
+                          buttonHeight: 53,
                           buttonWidth: 170,
                           buttonPadding:
                               const EdgeInsets.only(left: 14, right: 14),
@@ -62,6 +64,11 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                             color: Colors.white,
                           ),
                           items: dropdownItems,
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Please select Brand.';
+                            }
+                          },
                           onChanged: (value) {
                             setState(() {
                               cityValue = value as String;
@@ -75,6 +82,9 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(
+                  width: 10,
                 ),
                 Flexible(
                   child: Column(
@@ -94,8 +104,18 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             border: OutlineInputBorder(),
                             labelText: 'Sale in MT',
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 16.0, horizontal: 10.0),
+                            filled: true,
+                            fillColor: Colors.white,
                           ),
                           style: TextStyle(fontSize: 18.0, color: Colors.black),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter sale MT details.';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                     ],
@@ -119,14 +139,16 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                         // ),
                       ),
                       DropdownButtonHideUnderline(
-                        child: DropdownButton2(
+                        child: DropdownButtonFormField2(
+                          decoration:
+                              const InputDecoration.collapsed(hintText: ''),
                           isExpanded: true,
                           hint: const Text(
                             'Choose Brand',
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                             textAlign: TextAlign.left,
                           ),
-                          buttonHeight: 60,
+                          buttonHeight: 53,
                           buttonWidth: 170,
                           buttonPadding:
                               const EdgeInsets.only(left: 14, right: 14),
@@ -138,6 +160,11 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                             color: Colors.white,
                           ),
                           items: dropdownItems,
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Please select Brand.';
+                            }
+                          },
                           onChanged: (value) {
                             setState(() {
                               cityValue = value as String;
@@ -151,6 +178,9 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(
+                  width: 10,
                 ),
                 Flexible(
                   child: Column(
@@ -170,8 +200,18 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             border: OutlineInputBorder(),
                             labelText: 'Sale in MT',
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 16.0, horizontal: 10.0),
+                            filled: true,
+                            fillColor: Colors.white,
                           ),
                           style: TextStyle(fontSize: 18.0, color: Colors.black),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter sale MT details.';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                     ],
@@ -216,8 +256,18 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
                     labelText: 'Space in sq. feet',
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                   style: TextStyle(fontSize: 18.0, color: Colors.black),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter warehouse space.';
+                    }
+                    return null;
+                  },
                 ),
               ],
             ),
@@ -227,7 +277,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                   child: Column(
                     children: [
                       Container(
-                        width: 300,
+                        width: double.infinity,
                         padding: const EdgeInsets.fromLTRB(2, 14, 0, 10),
                         child: const Text(
                           'Transportation Assets',
@@ -237,14 +287,16 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                         ),
                       ),
                       DropdownButtonHideUnderline(
-                        child: DropdownButton2(
+                        child: DropdownButtonFormField2(
+                          decoration:
+                              const InputDecoration.collapsed(hintText: ''),
                           isExpanded: true,
                           hint: const Text(
                             'Vehicle Type',
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                             textAlign: TextAlign.left,
                           ),
-                          buttonHeight: 60,
+                          buttonHeight: 53,
                           buttonWidth: 170,
                           buttonPadding:
                               const EdgeInsets.only(left: 14, right: 14),
@@ -256,6 +308,11 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                             color: Colors.white,
                           ),
                           items: dropdownItems,
+                          validator: (value) {
+                            if (value == null) {
+                              return 'Please select vehicle type.';
+                            }
+                          },
                           onChanged: (value) {
                             setState(() {
                               districtValue = value as String;
@@ -270,12 +327,15 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                     ],
                   ),
                 ),
+                const SizedBox(
+                  width: 10,
+                ),
                 Flexible(
                   child: Column(
                     children: [
                       Container(
                         width: 190,
-                        margin: EdgeInsets.fromLTRB(0, 45, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(0, 45, 0, 0),
                         padding: const EdgeInsets.fromLTRB(2, 14, 0, 10),
                       ),
                       DropdownButtonHideUnderline(
@@ -285,8 +345,18 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             border: OutlineInputBorder(),
                             labelText: 'No. of Vehicles',
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 16.0, horizontal: 10.0),
+                            filled: true,
+                            fillColor: Colors.white,
                           ),
                           style: TextStyle(fontSize: 18.0, color: Colors.black),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter no. of vehicles.';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                     ],
