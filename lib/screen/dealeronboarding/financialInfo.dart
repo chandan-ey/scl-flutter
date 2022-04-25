@@ -275,7 +275,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.all(3.0),
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   width: double.infinity,
                   height: 150,
                   decoration: BoxDecoration(
