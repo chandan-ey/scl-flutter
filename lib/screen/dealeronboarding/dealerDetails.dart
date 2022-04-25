@@ -40,7 +40,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: const Text(
                     'Dealer Name',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 TextFormField(
@@ -72,7 +72,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: const Text(
                     'Business Address',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 TextFormField(
@@ -85,7 +85,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                     filled: true,
                     fillColor: Colors.white,
                   ),
-                  style: const TextStyle(fontSize: 18.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 16.0, color: Colors.black),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter address line 1.';
@@ -106,7 +106,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                     filled: true,
                     fillColor: Colors.white,
                   ),
-                  style: const TextStyle(fontSize: 18.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 16.0, color: Colors.black),
                 ),
               ],
             ),
@@ -120,7 +120,8 @@ class _DealerDetailsState extends State<DealerDetails> {
                         padding: const EdgeInsets.fromLTRB(2, 14, 0, 10),
                         child: const Text(
                           'State',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.left,
                         ),
                       ),
@@ -131,7 +132,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                           isExpanded: true,
                           hint: const Text(
                             'Select State',
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                            style: TextStyle(fontSize: 16, color: Colors.grey),
                             textAlign: TextAlign.left,
                           ),
                           buttonHeight: 53,
@@ -141,7 +142,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                           buttonDecoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(
-                              color: Colors.black,
+                              color: Colors.grey,
                             ),
                             color: Colors.white,
                           ),
@@ -176,7 +177,8 @@ class _DealerDetailsState extends State<DealerDetails> {
                         padding: const EdgeInsets.fromLTRB(2, 14, 0, 10),
                         child: const Text(
                           'District',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.left,
                         ),
                       ),
@@ -188,7 +190,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                           hint: Text(
                             'Select District',
                             style: TextStyle(
-                                fontSize: 14, color: Colors.grey[500]),
+                                fontSize: 16, color: Colors.grey[500]),
                             textAlign: TextAlign.left,
                           ),
                           buttonHeight: 53,
@@ -198,7 +200,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                           buttonDecoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(
-                              color: Colors.black,
+                              color: Colors.grey,
                             ),
                             color: Colors.white,
                           ),
@@ -234,7 +236,8 @@ class _DealerDetailsState extends State<DealerDetails> {
                         padding: const EdgeInsets.fromLTRB(2, 14, 0, 10),
                         child: const Text(
                           'Taluka',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.left,
                         ),
                       ),
@@ -245,7 +248,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                           isExpanded: true,
                           hint: const Text(
                             'Select Taluka',
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                            style: TextStyle(fontSize: 16, color: Colors.grey),
                             textAlign: TextAlign.left,
                           ),
                           buttonHeight: 53,
@@ -255,7 +258,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                           buttonDecoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(
-                              color: Colors.black,
+                              color: Colors.grey,
                             ),
                             color: Colors.white,
                           ),
@@ -290,7 +293,8 @@ class _DealerDetailsState extends State<DealerDetails> {
                         padding: const EdgeInsets.fromLTRB(2, 14, 0, 10),
                         child: const Text(
                           'City',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.left,
                         ),
                       ),
@@ -302,7 +306,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                           hint: Text(
                             'Select City',
                             style: TextStyle(
-                                fontSize: 14, color: Colors.grey[500]),
+                                fontSize: 16, color: Colors.grey[500]),
                             textAlign: TextAlign.left,
                           ),
                           buttonHeight: 53,
@@ -312,7 +316,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                           buttonDecoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(
-                              color: Colors.black,
+                              color: Colors.grey,
                             ),
                             color: Colors.white,
                           ),
@@ -345,7 +349,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                   child: const Text(
                     'Pin Code',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 TextFormField(
@@ -377,7 +381,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                   child: const Text(
                     'Email Address',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 TextFormField(
@@ -389,17 +393,13 @@ class _DealerDetailsState extends State<DealerDetails> {
                     filled: true,
                     fillColor: Colors.white,
                   ),
-                  style: const TextStyle(fontSize: 18.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 16.0, color: Colors.black),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter email address.';
                     }
                     return null;
                   },
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(
-                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')),
-                  ],
                 ),
               ],
             ),
@@ -410,7 +410,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                   child: const Text(
                     'Contact Number',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 TextFormField(
@@ -422,7 +422,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                     filled: true,
                     fillColor: Colors.white,
                   ),
-                  style: const TextStyle(fontSize: 18.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 16.0, color: Colors.black),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter contact number.';
@@ -442,7 +442,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                   child: const Text(
                     'Referral Code (If Any)',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 TextFormField(
@@ -454,7 +454,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                     filled: true,
                     fillColor: Colors.white,
                   ),
-                  style: const TextStyle(fontSize: 18.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 16.0, color: Colors.black),
                 ),
               ],
             ),
@@ -465,7 +465,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                   child: const Text(
                     'Password',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 TextFormField(
@@ -479,7 +479,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                     filled: true,
                     fillColor: Colors.white,
                   ),
-                  style: const TextStyle(fontSize: 18.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 16.0, color: Colors.black),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter Password.';
@@ -496,7 +496,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                   child: const Text(
                     'Confirm Password',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 TextFormField(
@@ -510,7 +510,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                     filled: true,
                     fillColor: Colors.white,
                   ),
-                  style: const TextStyle(fontSize: 18.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 16.0, color: Colors.black),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter confirm password.';
@@ -525,9 +525,16 @@ class _DealerDetailsState extends State<DealerDetails> {
             Column(
               children: [
                 Container(
-                  width: double.infinity,
+                  width: 200,
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: const Color(0xffFBBC33),
+                        onPrimary: const Color(0xff000000),
+                        textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        )),
                     onPressed: () {
                       // Validate returns true if the form is valid, or false otherwise.
                       if (_formKey.currentState!.validate()) {
@@ -538,7 +545,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                         );
                       }
                     },
-                    child: const Text('Submit'),
+                    child: const Text('Generate OTP'),
                   ),
                 ),
               ],

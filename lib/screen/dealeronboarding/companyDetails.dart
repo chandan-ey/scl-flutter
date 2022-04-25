@@ -10,7 +10,7 @@ class CompanyDetails extends StatefulWidget {
 
 class _CompanyDetailsState extends State<CompanyDetails> {
   bool companyApplicant = true;
-  String? statusValue;
+  String? statusValue = 'Company';
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(child: Text("Company"), value: "Company"),
@@ -210,29 +210,46 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                   ),
                   Row(
                     children: [
-                      Container(
-                          margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                          padding: const EdgeInsets.all(10),
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: const Color(0xffE31E30),
-                          ),
-                          child: const Text(
-                            '+',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
-                          )),
                       TextButton(
-                        onPressed: addItems,
-                        child: const Text(
-                          'Add Line',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.grey),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const AlertDialog(
+                                  scrollable: true,
+                                  content: const CompanyDetailsDialog(),
+                                );
+                              });
+                        },
+                        child: Row(
+                          children: [
+                            Container(
+                                margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                padding: const EdgeInsets.all(10),
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: const Color(0xffE31E30),
+                                ),
+                                child: const Text(
+                                  '+',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white),
+                                )),
+                            TextButton(
+                              onPressed: addItems,
+                              child: const Text(
+                                'Add Line',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.grey),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
-                  ),
+                  )
                 ],
               ),
             ),
