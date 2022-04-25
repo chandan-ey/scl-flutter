@@ -6,6 +6,7 @@ import '../dealeronboarding/dealerDetails.dart';
 import '../dealeronboarding/companyDetails.dart';
 import '../dealeronboarding/businessDetails.dart';
 import '../dealeronboarding/financialInfo.dart';
+import '../dialog/dealerOnboardingSuccessDialog.dart';
 
 class OnBoardOnePage extends StatefulWidget {
   const OnBoardOnePage({Key? key}) : super(key: key);
@@ -105,7 +106,19 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
                       ),
                     if (_currentStep == 3)
                       TextButton(
-                        onPressed: continued,
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const AlertDialog(
+                                  scrollable: true,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(32.0))),
+                                  content: DealerOnboardingSuccessDialog(),
+                                );
+                              });
+                        },
                         child: const Text(
                           'Submit',
                           style: TextStyle(

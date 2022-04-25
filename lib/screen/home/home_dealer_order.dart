@@ -105,25 +105,6 @@ class _HomePageState extends State<HomePage> {
                   elevation: 5,
                   margin: EdgeInsets.all(7),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                          'We are one of India'
-                                  "'"
-                                  's most sustainable and fastest growing companies that embraces varied perspectives, bias to action and continuous innovation to create happiness for all its stakeholders'
-                              .tr,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            color: Colors.black54,
-                            fontSize: 16,
-                          )),
-                    ],
-                  ),
-                ),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: const Color(0xffE31E30),
@@ -133,12 +114,10 @@ class _HomePageState extends State<HomePage> {
                           color: Color(0xffffffff),
                         )),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => new OnBoardOnePage()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => HomePage()));
                     },
-                    child: Text('Apply New Dealership'.toUpperCase()))
+                    child: Text('Place New Order'.toUpperCase()))
               ],
             )
             // child: Text('Welcome'.tr,
@@ -147,51 +126,51 @@ class _HomePageState extends State<HomePage> {
             //     fontSize: 18,
             //     )),
             ),
-        // Container(
-        //   width: double.infinity,
-        //   clipBehavior: Clip.antiAliasWithSaveLayer,
-        //   padding: EdgeInsets.all(15),
-        //   margin: EdgeInsets.fromLTRB(20, 10, 20, 20),
-        //   decoration: new BoxDecoration(
-        //       color: Colors.white,
-        //       borderRadius: BorderRadius.circular(5.0),
-        //       boxShadow: [
-        //         new BoxShadow(
-        //           color: Colors.black,
-        //           blurRadius: 5.0,
-        //         ),
-        //       ]),
-        //   child: Column(
-        //     children: <Widget>[
-        //       ElevatedButton(
-        //           style: ElevatedButton.styleFrom(
-        //               primary: const Color(0xffE31E30),
-        //               onPrimary: const Color(0xffffffff),
-        //               textStyle: TextStyle(
-        //                 fontSize: 15,
-        //                 color: Color(0xffffffff),
-        //               )),
-        //           onPressed: () {
-        //             Navigator.push(context,
-        //                 MaterialPageRoute(builder: (context) => HomePage()));
-        //           },
-        //           child: Text('Past Orders'.toUpperCase())),
-        //       ElevatedButton(
-        //           style: ElevatedButton.styleFrom(
-        //               primary: const Color(0xffE31E30),
-        //               onPrimary: const Color(0xffffffff),
-        //               textStyle: TextStyle(
-        //                 fontSize: 15,
-        //                 color: Color(0xffffffff),
-        //               )),
-        //           onPressed: () {
-        //             Navigator.push(context,
-        //                 MaterialPageRoute(builder: (context) => HomePage()));
-        //           },
-        //           child: Text('Orders waiting under evaluation'.toUpperCase()))
-        //     ],
-        //   ),
-        // ),
+        Container(
+          width: double.infinity,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          padding: EdgeInsets.all(15),
+          margin: EdgeInsets.fromLTRB(20, 10, 20, 20),
+          decoration: new BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(5.0),
+              boxShadow: [
+                new BoxShadow(
+                  color: Colors.black,
+                  blurRadius: 5.0,
+                ),
+              ]),
+          child: Column(
+            children: <Widget>[
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: const Color(0xffE31E30),
+                      onPrimary: const Color(0xffffffff),
+                      textStyle: TextStyle(
+                        fontSize: 15,
+                        color: Color(0xffffffff),
+                      )),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                  },
+                  child: Text('Past Orders'.toUpperCase())),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: const Color(0xffE31E30),
+                      onPrimary: const Color(0xffffffff),
+                      textStyle: TextStyle(
+                        fontSize: 15,
+                        color: Color(0xffffffff),
+                      )),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                  },
+                  child: Text('Orders waiting under evaluation'.toUpperCase()))
+            ],
+          ),
+        ),
         // Card(
         //   semanticContainer: true,
         //   clipBehavior: Clip.antiAliasWithSaveLayer,

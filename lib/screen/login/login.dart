@@ -38,18 +38,18 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: Container(
                   width: double.infinity,
-                  padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                   //decoration: const BoxDecoration(color: Color(0xff000000)),
-                  color: Colors.black.withOpacity(0.5),
+                  color: Colors.black.withOpacity(0.55),
                   child: Column(
                     children: [
                       Row(
                         children: <Widget>[
                           const Expanded(
-                              flex: 5,
+                              flex: 12,
                               child: Text(
                                 'Sign In',
                                 style: TextStyle(
@@ -71,39 +71,46 @@ class _LoginPageState extends State<LoginPage> {
                         visible: sendSMS,
                         child: Column(children: [
                           const Padding(
-                            padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                            padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                             child: TextField(
                               keyboardType: TextInputType.number,
                               maxLength: 10,
                               decoration: InputDecoration(
                                   fillColor: Colors.white,
                                   filled: true,
-                                  border: OutlineInputBorder(),
+                                  border: OutlineInputBorder(
+                                      // borderRadius: BorderRadius.all(10.0),
+                                      ),
                                   hintText: 'Mobile Number'),
                             ),
                           ),
                           Row(
                             children: [
-                              Expanded(
-                                  flex: 5,
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          primary: const Color(0xffFBBC33),
-                                          onPrimary: const Color(0xff000000),
-                                          textStyle: TextStyle(
-                                            fontSize: 20,
-                                            color: Color(0xff000000),
-                                          )),
-                                      onPressed: () {
-                                        _changed();
-                                      },
-                                      child: Text('Generate OTP'))),
+                              Container(
+                                width: 350,
+                                alignment: Alignment.center,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: const Color(0xffFBBC33),
+                                    onPrimary: const Color(0xff000000),
+                                    textStyle: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff000000),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    _changed();
+                                  },
+                                  child: const Text('Generate OTP'),
+                                ),
+                              ),
                             ],
                           )
                         ]),
                         replacement: Column(children: [
                           Container(
-                            padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                            padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -116,24 +123,29 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           Row(
                             children: [
-                              Expanded(
-                                  flex: 5,
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          primary: const Color(0xffFBBC33),
-                                          onPrimary: const Color(0xff000000),
-                                          textStyle: TextStyle(
-                                            fontSize: 20,
-                                            color: Color(0xff000000),
-                                          )),
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    HomePage()));
-                                      },
-                                      child: Text('Submit'))),
+                              Container(
+                                width: 350,
+                                alignment: Alignment.center,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: const Color(0xffFBBC33),
+                                      onPrimary: const Color(0xff000000),
+                                      textStyle: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xff000000),
+                                      )),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const HomePage(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text('Submit'),
+                                ),
+                              ),
                             ],
                           )
                         ]),

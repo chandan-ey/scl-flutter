@@ -49,7 +49,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                           isExpanded: true,
                           hint: const Text(
                             'Choose Brand',
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                            style: TextStyle(fontSize: 16, color: Colors.grey),
                             textAlign: TextAlign.left,
                           ),
                           buttonHeight: 53,
@@ -94,7 +94,8 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                         padding: const EdgeInsets.fromLTRB(2, 14, 0, 10),
                         child: const Text(
                           '',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.left,
                         ),
                       ),
@@ -109,7 +110,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                             filled: true,
                             fillColor: Colors.white,
                           ),
-                          style: TextStyle(fontSize: 18.0, color: Colors.black),
+                          style: TextStyle(fontSize: 16.0, color: Colors.black),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter sale MT details.';
@@ -145,7 +146,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                           isExpanded: true,
                           hint: const Text(
                             'Choose Brand',
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                            style: TextStyle(fontSize: 16, color: Colors.grey),
                             textAlign: TextAlign.left,
                           ),
                           buttonHeight: 53,
@@ -205,7 +206,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                             filled: true,
                             fillColor: Colors.white,
                           ),
-                          style: TextStyle(fontSize: 18.0, color: Colors.black),
+                          style: TextStyle(fontSize: 16.0, color: Colors.black),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter sale MT details.';
@@ -261,7 +262,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                     filled: true,
                     fillColor: Colors.white,
                   ),
-                  style: TextStyle(fontSize: 18.0, color: Colors.black),
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter warehouse space.';
@@ -293,7 +294,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                           isExpanded: true,
                           hint: const Text(
                             'Vehicle Type',
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                            style: TextStyle(fontSize: 16, color: Colors.grey),
                             textAlign: TextAlign.left,
                           ),
                           buttonHeight: 53,
@@ -342,15 +343,19 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                         child: TextFormField(
                           // margin: EdgeInsets.fromLTRB(0,15,0,0),
                           decoration: const InputDecoration(
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
-                            border: OutlineInputBorder(),
+                            // floatingLabelBehavior: FloatingLabelBehavior.never,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
                             labelText: 'No. of Vehicles',
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 16.0, horizontal: 10.0),
                             filled: true,
                             fillColor: Colors.white,
                           ),
-                          style: TextStyle(fontSize: 18.0, color: Colors.black),
+                          style: TextStyle(fontSize: 16.0, color: Colors.black),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter no. of vehicles.';
@@ -367,17 +372,17 @@ class _BusinessDetailsState extends State<BusinessDetails> {
             Row(
               children: [
                 Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
+                    margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+                    padding: const EdgeInsets.all(10),
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: const Color(0xffE31E30),
                     ),
-                    child: Text(
+                    child: const Text(
                       '+',
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     )),
-                Text(
+                const Text(
                   'Add Line',
                   style: TextStyle(
                       fontSize: 16,
