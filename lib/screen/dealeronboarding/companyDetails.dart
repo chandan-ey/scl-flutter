@@ -20,9 +20,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
   }
 
   List items = [
-    {'company': 'test1', 'partner': 'testpartner1'},
-    {'company': 'test2', 'partner': 'testpartner2'},
-    {'company': '123', 'partner': ''}
+    {'company': '', 'partner': ''}
   ];
 
   addItems() {

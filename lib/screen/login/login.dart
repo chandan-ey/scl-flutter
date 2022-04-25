@@ -11,11 +11,59 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool sendSMS = true;
-
+  int mobileNumberLength = 0;
+  int otpLength = 0;
   final TextEditingController _fieldOne = TextEditingController();
   final TextEditingController _fieldTwo = TextEditingController();
   final TextEditingController _fieldThree = TextEditingController();
   final TextEditingController _fieldFour = TextEditingController();
+  final mobileNoTextController = TextEditingController();
+  bool _validate = false;
+  bool _validMobile = false;
+  bool _validOTP = false;
+  validateMobile() {
+    mobileNumberLength = mobileNoTextController.text.length;
+    setState(() {
+      if (mobileNumberLength == 10) {
+        _validMobile = true;
+      } else {
+        _validMobile = false;
+      }
+    });
+  }
+
+  validateOTP() {
+    setState(() {
+      if (_fieldOne.text.length == 1 &&
+          _fieldTwo.text.length == 1 &&
+          _fieldThree.text.length == 1 &&
+          _fieldFour.text.length == 1) {
+        _validOTP = true;
+      } else {
+        _validOTP = false;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Start listening to changes.
+    mobileNoTextController.addListener(validateMobile);
+    _fieldOne.addListener(validateOTP);
+    _fieldTwo.addListener(validateOTP);
+    _fieldThree.addListener(validateOTP);
+    _fieldFour.addListener(validateOTP);
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the widget tree.
+    // This also removes the _printLatestValue listener.
+    mobileNoTextController.dispose();
+    super.dispose();
+  }
 
   void _changed() {
     setState(() {
@@ -70,28 +118,36 @@ class _LoginPageState extends State<LoginPage> {
                       Visibility(
                         visible: sendSMS,
                         child: Column(children: [
-                          const Padding(
-                            padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                            child: TextField(
-                              keyboardType: TextInputType.number,
-                              maxLength: 10,
-                              decoration: InputDecoration(
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                      // borderRadius: BorderRadius.all(10.0),
-                                      ),
-                                  hintText: 'Mobile Number'),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          TextFormField(
+                            controller: mobileNoTextController,
+                            maxLength: 10,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.never,
+                              border: OutlineInputBorder(),
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 16.0, horizontal: 10.0),
+                              filled: true,
+                              fillColor: Colors.white,
+                              hintText: 'Mobile Number',
                             ),
+                            style: const TextStyle(
+                                fontSize: 18.0, color: Colors.black),
                           ),
                           Row(
                             children: [
                               Container(
-                                width: 350,
+                                width: 330,
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    primary: const Color(0xffFBBC33),
+                                    primary: _validMobile
+                                        ? const Color(0xffFBBC33)
+                                        : const Color(0xffcccccc),
                                     onPrimary: const Color(0xff000000),
                                     textStyle: const TextStyle(
                                       fontSize: 18,
@@ -100,7 +156,9 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    _changed();
+                                    if (mobileNumberLength == 10) {
+                                      _changed();
+                                    }
                                   },
                                   child: const Text('Generate OTP'),
                                 ),
@@ -124,11 +182,13 @@ class _LoginPageState extends State<LoginPage> {
                           Row(
                             children: [
                               Container(
-                                width: 350,
+                                width: 330,
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: const Color(0xffFBBC33),
+                                      primary: _validOTP
+                                          ? const Color(0xffFBBC33)
+                                          : const Color(0xffcccccc),
                                       onPrimary: const Color(0xff000000),
                                       textStyle: const TextStyle(
                                         fontSize: 18,
@@ -136,12 +196,15 @@ class _LoginPageState extends State<LoginPage> {
                                         color: Color(0xff000000),
                                       )),
                                   onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const HomePage(),
-                                      ),
-                                    );
+                                    if (_validOTP) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const HomePage(),
+                                        ),
+                                      );
+                                    }
                                   },
                                   child: const Text('Submit'),
                                 ),
