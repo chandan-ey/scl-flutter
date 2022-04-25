@@ -56,7 +56,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: const Text(
                     'Status of the Applicant',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 DropdownButtonHideUnderline(
@@ -271,7 +271,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                 padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                 child: const Text(
                   'Company',
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.left,
                 ),
               ),
@@ -307,7 +307,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                 padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                 child: const Text(
                   'Partnership',
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.left,
                 ),
               ),

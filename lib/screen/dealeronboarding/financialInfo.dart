@@ -29,7 +29,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: const Text(
                     'PAN Details',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 TextFormField(
@@ -58,7 +58,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: const Text(
                     'GST Details',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 TextFormField(
@@ -70,7 +70,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                     filled: true,
                     fillColor: Colors.white,
                   ),
-                  style: TextStyle(fontSize: 18.0, color: Colors.black),
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter GST Details';
@@ -87,7 +87,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: const Text(
                     'State of Registration',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 TextFormField(
@@ -99,7 +99,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                     filled: true,
                     fillColor: Colors.white,
                   ),
-                  style: TextStyle(fontSize: 18.0, color: Colors.black),
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter Registration';
@@ -116,7 +116,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: const Text(
                     'Bank Account Number',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 TextFormField(
@@ -128,7 +128,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                     filled: true,
                     fillColor: Colors.white,
                   ),
-                  style: TextStyle(fontSize: 18.0, color: Colors.black),
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter Bank Account Number';
@@ -145,7 +145,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: const Text(
                     'IFSC Code',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 TextFormField(
@@ -157,7 +157,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                     filled: true,
                     fillColor: Colors.white,
                   ),
-                  style: TextStyle(fontSize: 18.0, color: Colors.black),
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter IFSC Code';
@@ -175,7 +175,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: const Text(
                     'Nomination Particulars',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 (SingleChildScrollView(
@@ -271,7 +271,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: const Text(
                     'Upload Documents',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
@@ -342,6 +342,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Checkbox(
                       value: agree,
@@ -353,8 +354,8 @@ class _FinancialInfoState extends State<FinancialInfo> {
                     ),
                     const Text(
                       'I have read and agree to the terms and conditions.',
-                      overflow: TextOverflow.ellipsis,
-                    )
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ],
                 )
               ],

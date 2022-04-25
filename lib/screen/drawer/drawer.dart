@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../screen/home/home.dart';
 import '../dealeronboarding/step1.dart';
+import '../login/login.dart';
 
 class DrawerPage extends StatefulWidget {
   const DrawerPage({Key? key}) : super(key: key);
@@ -59,6 +60,18 @@ class _DrawerPageState extends State<DrawerPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => OnBoardOnePage()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text('Logout'),
+              // leading: new CircleAvatar(
+              //   child: new Text('B2'),
+              // ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
                 );
               },
             ),
