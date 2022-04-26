@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import '../dialog/nomineeDetailsDialog.dart';
+//import 'package:file_picker/file_picker.dart';
 
 class FinancialInfo extends StatefulWidget {
   const FinancialInfo({Key? key}) : super(key: key);
@@ -9,11 +11,13 @@ class FinancialInfo extends StatefulWidget {
 
 class _FinancialInfoState extends State<FinancialInfo> {
   bool agree = false;
+  String? result;
+  String? path;
+  String? filePath;
+  bool isLoading = false;
+  File? fileToDisplay;
 
-  pickFiles() async {
-    /*  FilePickerResult? result = await FilePicker.platform
-        .pickFiles(type: FileType.any, allowMultiple: false); */
-  }
+  pickFiles() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -287,8 +291,8 @@ class _FinancialInfoState extends State<FinancialInfo> {
                       children: [
                         Align(
                           alignment: Alignment.topLeft,
-                          child: new InkWell(
-                              child: new Text(
+                          child: InkWell(
+                              child: const Text(
                                 'Document 1',
                                 style: TextStyle(),
                               ),

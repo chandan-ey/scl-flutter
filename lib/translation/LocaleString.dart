@@ -6,18 +6,19 @@ class LocaleString extends Translations {
   Map<String, Map<String, String>> get keys => {
         'en_US': {
           'dealerhome': 'Dealer Home',
-          'applyfordealership': 'APPLY FOR DEALERSHIP',
-          'english': 'English',
-          'hindi': 'Hindi',
-          'onboard': 'Dealer Onboarding',
-          'dealeronboarding': 'Dealer Onboarding'
+          'welcomedealername': 'Welcome Dealer Name',
+          'IDNumber': 'IDNumber',
+          'desc':
+              'We are one of India most sustainable and fastest growing companies that embraces varied perspectives, bias to action and continuous innovation to create happiness for all its stakeholders',
+          'apply': 'APPLY NEW DEALERSHIP'
         },
         'hi_IN': {
           'dealerhome': 'डीलर होम',
-          'applyfordealership': 'डीलरशिप के लिए आवेदन करें',
-          'english': 'अंग्रेज़ी',
-          'hindi': 'हिन्दी',
-          'onboard': 'डीलर ऑनबोर्डिंग'
+          'welcomedealername': 'स्वागत डीलर का नाम',
+          'IDNumber': 'आईडी नंबर',
+          'desc':
+              'हम भारत की सबसे स्थायी और सबसे तेजी से बढ़ती कंपनियों में से एक हैं जो अपने सभी हितधारकों के लिए खुशी पैदा करने के लिए विभिन्न दृष्टिकोणों, कार्रवाई के लिए पूर्वाग्रह और निरंतर नवाचार को अपनाती है।',
+          'apply': 'नई डीलरशिप लागू करें'
         }
       };
 }
