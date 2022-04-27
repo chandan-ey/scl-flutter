@@ -4,6 +4,7 @@ import 'package:cupertino_icons/cupertino_icons.dart';
 import '/screen/dealeronboarding/step1.dart';
 import '../drawer/drawer.dart';
 import 'package:get/get.dart';
+import '../../translation/LocaleString.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String dropdownValue = 'EN';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +38,35 @@ class _HomePageState extends State<HomePage> {
               CupertinoIcons.search,
               color: Color.fromRGBO(255, 255, 255, 0.74),
             ),
+          ),
+          DropdownButton<String>(
+            value: dropdownValue,
+            icon: const Icon(Icons.arrow_downward),
+            elevation: 16,
+            style: const TextStyle(color: Colors.deepPurple),
+            underline: Container(
+              height: 2,
+              color: Colors.deepPurpleAccent,
+            ),
+            onChanged: (String? newValue) {
+              setState(() {
+                dropdownValue = newValue!;
+                if (dropdownValue == 'EN') {
+                  var locale = Locale('en', 'US');
+                  Get.updateLocale(locale);
+                } else {
+                  var locale = Locale('hi', 'IN');
+                  Get.updateLocale(locale);
+                }
+              });
+            },
+            items: <String>['EN', 'HI']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
           )
         ],
       ),
@@ -72,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Welcome Dealer Name'.tr,
+                          Text('welcomedealername'.tr,
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -110,11 +141,7 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                          'We are one of India'
-                                  "'"
-                                  's most sustainable and fastest growing companies that embraces varied perspectives, bias to action and continuous innovation to create happiness for all its stakeholders'
-                              .tr,
+                      Text('desc'.tr,
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontWeight: FontWeight.w300,
@@ -138,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(
                               builder: (context) => new OnBoardOnePage()));
                     },
-                    child: Text('Apply New Dealership'.toUpperCase()))
+                    child: Text('apply'.tr))
               ],
             )
             // child: Text('Welcome'.tr,

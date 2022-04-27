@@ -101,6 +101,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                       ),
                       DropdownButtonHideUnderline(
                         child: TextFormField(
+                          keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             border: OutlineInputBorder(),
@@ -197,6 +198,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                       ),
                       DropdownButtonHideUnderline(
                         child: TextFormField(
+                          keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             border: OutlineInputBorder(),
@@ -253,6 +255,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                   ),
                 ),
                 TextFormField(
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -341,6 +344,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                       ),
                       DropdownButtonHideUnderline(
                         child: TextFormField(
+                          keyboardType: TextInputType.number,
                           // margin: EdgeInsets.fromLTRB(0,15,0,0),
                           decoration: const InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.never,
