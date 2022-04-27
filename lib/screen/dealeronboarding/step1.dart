@@ -23,7 +23,7 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('dealeronboarding'.tr,
+        title: Text('Dealer Onboarding',
             style: const TextStyle(
               fontSize: 20,
               fontFamily: 'Roboto',

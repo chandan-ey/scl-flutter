@@ -141,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                           Row(
                             children: [
                               Container(
-                                width: 330,
+                                width: 350,
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
@@ -182,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                           Row(
                             children: [
                               Container(
-                                width: 330,
+                                width: 350,
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(

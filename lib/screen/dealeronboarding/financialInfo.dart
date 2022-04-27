@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import '../dialog/nomineeDetailsDialog.dart';
 //import 'package:file_picker/file_picker.dart';
@@ -11,13 +10,11 @@ class FinancialInfo extends StatefulWidget {
 
 class _FinancialInfoState extends State<FinancialInfo> {
   bool agree = false;
-  String? result;
-  String? path;
-  String? filePath;
-  bool isLoading = false;
-  File? fileToDisplay;
 
-  pickFiles() async {}
+  pickFiles() async {
+    /* FilePickerResult? result = await FilePicker.platform
+        .pickFiles(type: FileType.any, allowMultiple: false); */
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +121,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   ),
                 ),
                 TextFormField(
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -291,8 +289,8 @@ class _FinancialInfoState extends State<FinancialInfo> {
                       children: [
                         Align(
                           alignment: Alignment.topLeft,
-                          child: InkWell(
-                              child: const Text(
+                          child: new InkWell(
+                              child: new Text(
                                 'Document 1',
                                 style: TextStyle(),
                               ),

@@ -10,6 +10,14 @@ class DealerDetails extends StatefulWidget {
 
 class _DealerDetailsState extends State<DealerDetails> {
   String? cityValue, talukaValue, districtValue, stateValue;
+  late String _password1;
+  double _strength = 0;
+
+  RegExp numReg = RegExp(r".*[0-9].*");
+  RegExp letterReg = RegExp(r".*[A-Za-z].*");
+
+  String _displayText = 'Please enter a password';
+
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(child: Text("USA"), value: "USA"),
@@ -353,6 +361,8 @@ class _DealerDetailsState extends State<DealerDetails> {
                   ),
                 ),
                 TextFormField(
+                  maxLength: 6,
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -414,6 +424,8 @@ class _DealerDetailsState extends State<DealerDetails> {
                   ),
                 ),
                 TextFormField(
+                  maxLength: 10,
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -470,6 +482,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                 ),
                 TextFormField(
                   controller: _password,
+                  onChanged: (value) => _checkPassword(value),
                   obscureText: true,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -487,6 +500,25 @@ class _DealerDetailsState extends State<DealerDetails> {
                     return null;
                   },
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
+                LinearProgressIndicator(
+                  value: _strength,
+                  backgroundColor: Colors.grey[300],
+                  color: _strength <= 1 / 4
+                      ? Colors.red
+                      : _strength == 2 / 4
+                          ? Colors.yellow
+                          : _strength == 3 / 4
+                              ? Colors.blue
+                              : Colors.green,
+                  minHeight: 5,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(_displayText, style: const TextStyle(fontSize: 18)),
               ],
             ),
             Column(
@@ -554,5 +586,38 @@ class _DealerDetailsState extends State<DealerDetails> {
         ),
       ),
     );
+  }
+
+  void _checkPassword(String value) {
+    _password1 = value.trim();
+
+    if (_password1.isEmpty) {
+      setState(() {
+        _strength = 0;
+        _displayText = 'Please enter your password';
+      });
+    } else if (_password1.length < 6) {
+      setState(() {
+        _strength = 1 / 4;
+        _displayText = 'Your password is too short';
+      });
+    } else if (_password1.length < 8) {
+      setState(() {
+        _strength = 2 / 4;
+        _displayText = 'Your password strength is moderate';
+      });
+    } else {
+      if (!letterReg.hasMatch(_password1) || !numReg.hasMatch(_password1)) {
+        setState(() {
+          _strength = 3 / 4;
+          _displayText = 'Your password is strong';
+        });
+      } else {
+        setState(() {
+          _strength = 1;
+          _displayText = 'Your password is great';
+        });
+      }
+    }
   }
 }

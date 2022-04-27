@@ -20,6 +20,27 @@ class _BusinessDetailsState extends State<BusinessDetails> {
     return menuItems;
   }
 
+  List brandWiseSaleItems = [
+    {'brand': '', 'sale': ''},
+    {'brand': '', 'sale': ''}
+  ];
+
+  addBrandSaleItems() {
+    setState(() {
+      brandWiseSaleItems.add({'brand': '', 'sale': ''});
+    });
+  }
+
+  List vehicleItems = [
+    {'type': '', 'count': ''}
+  ];
+
+  addVehicleItems() {
+    setState(() {
+      vehicleItems.add({'type': '', 'count': ''});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
