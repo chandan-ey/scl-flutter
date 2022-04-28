@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import '/screen/dealeronboarding/step1.dart';
 
 class BusinessDetails extends StatefulWidget {
-  const BusinessDetails({Key? key}) : super(key: key);
+  const BusinessDetails({Key? key, required this.parentfunc}) : super(key: key);
+  final parentFunctionCallback parentfunc;
   @override
   State<BusinessDetails> createState() => _BusinessDetailsState();
 }
@@ -185,6 +187,37 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: () => {widget.parentfunc(1)},
+                  child: const Text(
+                    'Back',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Color(0xff6D6E71)),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => {widget.parentfunc(3)},
+                  child: const Text(
+                    'Next',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Color(0xffE31E30)),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

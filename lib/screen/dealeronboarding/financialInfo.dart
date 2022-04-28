@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import '../dialog/nomineeDetailsDialog.dart';
 //import 'package:file_picker/file_picker.dart';
+import '/screen/dealeronboarding/step1.dart';
+import '../dialog/dealerOnboardingSuccessDialog.dart';
 
 class FinancialInfo extends StatefulWidget {
-  const FinancialInfo({Key? key}) : super(key: key);
+  const FinancialInfo({Key? key, required this.parentfunc}) : super(key: key);
+  final parentFunctionCallback parentfunc;
   @override
   State<FinancialInfo> createState() => _FinancialInfoState();
 }
@@ -362,6 +365,49 @@ class _FinancialInfoState extends State<FinancialInfo> {
                 )
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: () => {widget.parentfunc(2)},
+                  child: const Text(
+                    'Back',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Color(0xff6D6E71)),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const AlertDialog(
+                            scrollable: true,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(32.0))),
+                            content: DealerOnboardingSuccessDialog(),
+                          );
+                        })
+                  },
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Color(0xffE31E30)),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

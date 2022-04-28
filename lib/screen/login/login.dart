@@ -141,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                           Row(
                             children: [
                               Container(
-                                width: 330,
+                                width: 350,
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
@@ -164,7 +164,19 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ],
-                          )
+                          ),
+                          Row(children: const [
+                            Center(
+                                widthFactor: 1.8,
+                                heightFactor: 2,
+                                child: Text(
+                                  'Get Associated with SCL >',
+                                  style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                ))
+                          ])
                         ]),
                         replacement: Column(children: [
                           Container(
@@ -182,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                           Row(
                             children: [
                               Container(
-                                width: 330,
+                                width: 350,
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
@@ -210,7 +222,19 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ],
-                          )
+                          ),
+                          Row(children: const [
+                            Center(
+                                widthFactor: 1.8,
+                                heightFactor: 2,
+                                child: Text(
+                                  'Resend OTP in 03:42 mins',
+                                  style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                ))
+                          ])
                         ]),
                       ),
                     ],
