@@ -121,27 +121,59 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(
                             height: 15,
                           ),
-                          TextFormField(
-                            controller: mobileNoTextController,
-                            maxLength: 10,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.never,
-                              border: OutlineInputBorder(),
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: 16.0, horizontal: 10.0),
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Mobile Number',
-                            ),
-                            style: const TextStyle(
-                                fontSize: 18.0, color: Colors.black),
+                          Row(
+                            children: [
+                              Container(
+                                width: 55,
+                                margin: const EdgeInsets.only(
+                                    bottom: 22.0, left: 5.0),
+                                child: TextFormField(
+                                  readOnly: true,
+                                  style: const TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                  decoration: const InputDecoration(
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                    border: InputBorder.none,
+                                    // border: OutlineInputBorder(
+                                    //   borderRadius: BorderRadius.only(topRight: Radius.circular(0), bottomRight: Radius.circular(0)),
+                                    // ),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 7.0, horizontal: 10.0),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    labelText: '+91',
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 290,
+                                child: TextFormField(
+                                  controller: mobileNoTextController,
+                                  maxLength: 10,
+                                  keyboardType: TextInputType.number,
+                                  decoration: const InputDecoration(
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                    border: InputBorder.none,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 16.0, horizontal: 10.0),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    hintText: 'Mobile Number',
+                                  ),
+                                  style: const TextStyle(
+                                      fontSize: 18.0, color: Colors.black),
+                                ),
+                              ),
+                            ],
                           ),
                           Row(
                             children: [
                               Container(
-                                width: 330,
+                                width: 350,
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
@@ -167,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           Row(children: const [
                             Center(
-                                widthFactor: 1.7,
+                                widthFactor: 1.8,
                                 heightFactor: 2,
                                 child: Text(
                                   'Get Associated with SCL >',
@@ -194,7 +226,7 @@ class _LoginPageState extends State<LoginPage> {
                           Row(
                             children: [
                               Container(
-                                width: 330,
+                                width: 350,
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
