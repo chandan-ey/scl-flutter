@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../dealeronboarding/companyDetails.dart';
+
 class CompanyDetailsDialog extends StatefulWidget {
-  const CompanyDetailsDialog({Key? key}) : super(key: key);
+  CompanyDetailsDialog({Key? key, required this.dialogcallback})
+      : super(key: key);
+  companydialogFunctionCallback dialogcallback;
   @override
   State<CompanyDetailsDialog> createState() => _CompanyDetailsDialog();
 }
 
 class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
   final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _director = TextEditingController();
+  final TextEditingController _father = TextEditingController();
+  final TextEditingController _address = TextEditingController();
+  final TextEditingController _pan = TextEditingController();
+  final TextEditingController _din = TextEditingController();
+  final TextEditingController _banker = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -30,6 +42,7 @@ class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
                   ),
                 ),
                 TextFormField(
+                  controller: _director,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -62,6 +75,7 @@ class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
                   ),
                 ),
                 TextFormField(
+                  controller: _father,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -94,6 +108,7 @@ class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
                   ),
                 ),
                 TextFormField(
+                  controller: _address,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -123,6 +138,7 @@ class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
                   ),
                 ),
                 TextFormField(
+                  controller: _pan,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -152,6 +168,7 @@ class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
                   ),
                 ),
                 TextFormField(
+                  controller: _din,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -184,6 +201,7 @@ class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
                   ),
                 ),
                 TextFormField(
+                  controller: _banker,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -230,7 +248,19 @@ class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
                       ),
                       TextButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {}
+                          if (_formKey.currentState!.validate()) {
+                            Map formData = {
+                              'director': _director.text,
+                              'fathername': _father.text,
+                              'address': _address.text,
+                              'pan': _pan.text,
+                              'din': _din.text,
+                              'banker': _banker.text
+                            };
+                            widget.dialogcallback(formData);
+                            Navigator.of(context, rootNavigator: true)
+                                .pop('dialog');
+                          }
                         },
                         child: const Text(
                           'SAVE',

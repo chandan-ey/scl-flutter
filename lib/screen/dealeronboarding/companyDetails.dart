@@ -1,7 +1,11 @@
+// ignore_for_file: unnecessary_const
+
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import '../dialog/companyDetailsDialog.dart';
 import '/screen/dealeronboarding/step1.dart';
+
+typedef companydialogFunctionCallback = Function(Map companyrow);
 
 class CompanyDetails extends StatefulWidget {
   const CompanyDetails({Key? key, required this.parentfunc}) : super(key: key);
@@ -21,6 +25,25 @@ class _CompanyDetailsState extends State<CompanyDetails> {
     ];
     return menuItems;
   }
+
+  List companyData = [
+    {
+      'director': 'john',
+      'fathername': 'william',
+      'address': 'new street',
+      'pan': 'AWEP786TY67',
+      'din': '123',
+      'banker': 'rbi'
+    },
+    {
+      'director': 'john',
+      'fathername': 'william',
+      'address': 'new street',
+      'pan': 'AWEP786TY67',
+      'din': '123',
+      'banker': 'rbi'
+    }
+  ];
 
   List items = [
     {'company': '', 'partner': ''}
@@ -125,32 +148,29 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                         DataColumn(label: Text('DIN No')),
                         DataColumn(label: Text('Banker')),
                       ],
-                      rows: const [
-                        DataRow(cells: [
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                        ]),
-                        DataRow(cells: [
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                        ]),
-                        DataRow(cells: [
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                        ]),
-                      ],
+                      rows: List<DataRow>.generate(
+                        companyData.length,
+                        (int index) => DataRow(
+                            color: MaterialStateProperty.resolveWith<Color?>(
+                                (Set<MaterialState> states) {
+                              // All rows will have the same selected color.
+                              if (states.contains(MaterialState.selected)) {
+                                return Theme.of(context)
+                                    .colorScheme
+                                    .primary
+                                    .withOpacity(0.08);
+                              }
+                              return null; // Use default value for other states and odd rows.
+                            }),
+                            cells: <DataCell>[
+                              DataCell(Text(companyData[index]['director'])),
+                              DataCell(Text(companyData[index]['fathername'])),
+                              DataCell(Text(companyData[index]['fathername'])),
+                              DataCell(Text(companyData[index]['pan'])),
+                              DataCell(Text(companyData[index]['din'])),
+                              DataCell(Text(companyData[index]['banker']))
+                            ]),
+                      ),
                     ),
                   )),
                   Row(
@@ -160,9 +180,15 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {
-                                return const AlertDialog(
+                                return AlertDialog(
                                   scrollable: true,
-                                  content: const CompanyDetailsDialog(),
+                                  content: CompanyDetailsDialog(
+                                    dialogcallback: (Map companyrow) {
+                                      setState(() {
+                                        companyData.add(companyrow);
+                                      });
+                                    },
+                                  ),
                                 );
                               });
                         },
@@ -212,16 +238,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                   Row(
                     children: [
                       TextButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return const AlertDialog(
-                                  scrollable: true,
-                                  content: const CompanyDetailsDialog(),
-                                );
-                              });
-                        },
+                        onPressed: () {},
                         child: Row(
                           children: [
                             Container(
@@ -368,5 +385,11 @@ class _CompanyDetailsState extends State<CompanyDetails> {
         ),
       ],
     );
+  }
+
+  appendData(Map data) {
+    setState(() {
+      companyData.add(data);
+    });
   }
 }
