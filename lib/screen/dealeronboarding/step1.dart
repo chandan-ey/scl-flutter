@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../drawer/drawer.dart';
@@ -7,6 +9,8 @@ import '../dealeronboarding/companyDetails.dart';
 import '../dealeronboarding/businessDetails.dart';
 import '../dealeronboarding/financialInfo.dart';
 import '../dialog/dealerOnboardingSuccessDialog.dart';
+
+typedef parentFunctionCallback = void Function(int number);
 
 class OnBoardOnePage extends StatefulWidget {
   const OnBoardOnePage({Key? key}) : super(key: key);
@@ -19,11 +23,34 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
   int _currentStep = 0;
   StepperType stepperType = StepperType.horizontal;
 
+  String labelHeading = 'Dealer Details';
+  tapped(int step) {
+    setState(() => _currentStep = step);
+    headerLabel(step);
+  }
+
+  headerLabel(step) {
+    if (step == 0) {
+      labelHeading = 'Dealer Details';
+    } else if (step == 1) {
+      labelHeading = 'Company Details';
+    } else if (step == 2) {
+      labelHeading = 'Business Details';
+    } else if (step == 3) {
+      labelHeading = 'Financial Information';
+    }
+  }
+
+  goToStep(int value) {
+    setState(() => {_currentStep = value});
+    headerLabel(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dealer Onboarding',
+        title: Text('dealeronboarding'.tr,
             style: const TextStyle(
               fontSize: 20,
               fontFamily: 'Roboto',
@@ -76,72 +103,20 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
               child: Stepper(
                 controlsBuilder: (BuildContext context, details) => Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    TextButton(
-                      onPressed: cancel,
-                      child: const Text(
-                        'Back',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Color(0xff6D6E71)),
-                      ),
-                    ),
-                    if (_currentStep < 3)
-                      TextButton(
-                        onPressed: continued,
-                        child: const Text(
-                          'Next',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Color(0xffE31E30)),
-                        ),
-                      ),
-                    if (_currentStep == 3)
-                      TextButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return const AlertDialog(
-                                  scrollable: true,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(32.0))),
-                                  content: DealerOnboardingSuccessDialog(),
-                                );
-                              });
-                        },
-                        child: const Text(
-                          'Submit',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Color(0xffE31E30)),
-                        ),
-                      ),
-                  ],
+                  children: <Widget>[],
                 ),
                 type: stepperType,
                 physics: const ScrollPhysics(),
                 currentStep: _currentStep,
                 onStepTapped: (step) => tapped(step),
-                onStepContinue: continued,
-                onStepCancel: cancel,
                 steps: <Step>[
                   Step(
                     title: new Text(''),
-                    content: const DealerDetails(),
+                    content: DealerDetails(
+                      parentfunc: (int number) {
+                        goToStep(number);
+                      },
+                    ),
                     isActive: _currentStep >= 0,
                     state: _currentStep >= 0
                         ? StepState.complete
@@ -179,32 +154,5 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
       ),
       drawer: const DrawerPage(),
     );
-  }
-
-  String labelHeading = 'Dealer Details';
-  tapped(int step) {
-    setState(() => _currentStep = step);
-  }
-
-  headerLabel(step) {
-    if (step == 0) {
-      labelHeading = 'Dealer Details';
-    } else if (step == 1) {
-      labelHeading = 'Company Details';
-    } else if (step == 2) {
-      labelHeading = 'Business Details';
-    } else if (step == 3) {
-      labelHeading = 'Financial Information';
-    }
-  }
-
-  continued() {
-    _currentStep < 3 ? setState(() => _currentStep += 1) : null;
-    headerLabel(_currentStep);
-  }
-
-  cancel() {
-    _currentStep > 0 ? setState(() => _currentStep -= 1) : null;
-    headerLabel(_currentStep);
   }
 }

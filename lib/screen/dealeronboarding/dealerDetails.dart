@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:scl_android/screen/dealeronboarding/step1.dart';
 
 class DealerDetails extends StatefulWidget {
-  const DealerDetails({Key? key}) : super(key: key);
+  DealerDetails({Key? key, required this.parentfunc}) : super(key: key);
+  final parentFunctionCallback parentfunc;
   @override
   State<DealerDetails> createState() => _DealerDetailsState();
 }
@@ -28,10 +30,37 @@ class _DealerDetailsState extends State<DealerDetails> {
     return menuItems;
   }
 
+  final TextEditingController _dealerName = TextEditingController();
+  final TextEditingController _addressLine1 = TextEditingController();
+  final TextEditingController _addressLine2 = TextEditingController();
+  final TextEditingController _pincode = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _contactnumber = TextEditingController();
+  final TextEditingController _referralcode = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
+  dealerFormDetails() {
+    widget.parentfunc(1);
+    Map formData = {
+      'dealerName': _dealerName.text,
+      'address1': _addressLine1.text,
+      'address2': _addressLine2.text,
+      'pincode': _pincode.text,
+      'email': _email.text,
+      'contactNumber': _contactnumber.text,
+      'referralCode': _referralcode.text,
+      'password': _password.text,
+      'confirmPassword': _confirmPassword.text,
+      'state': stateValue,
+      'district': districtValue,
+      'taluka': talukaValue,
+      'city': cityValue
+    };
+    print(formData);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +81,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   ),
                 ),
                 TextFormField(
+                  controller: _dealerName,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -84,6 +114,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   ),
                 ),
                 TextFormField(
+                  controller: _addressLine1,
                   decoration: const InputDecoration(
                     labelText: 'Address Line 1',
                     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -105,6 +136,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   height: 15.0,
                 ),
                 TextFormField(
+                  controller: _addressLine2,
                   decoration: const InputDecoration(
                     labelText: 'Address Line 2',
                     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -361,8 +393,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   ),
                 ),
                 TextFormField(
-                  maxLength: 6,
-                  keyboardType: TextInputType.number,
+                  controller: _pincode,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -395,6 +426,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   ),
                 ),
                 TextFormField(
+                  controller: _email,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -424,8 +456,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   ),
                 ),
                 TextFormField(
-                  maxLength: 10,
-                  keyboardType: TextInputType.number,
+                  controller: _contactnumber,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -458,6 +489,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   ),
                 ),
                 TextFormField(
+                  controller: _referralcode,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -567,21 +599,54 @@ class _DealerDetailsState extends State<DealerDetails> {
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         )),
-                    onPressed: () {
-                      // Validate returns true if the form is valid, or false otherwise.
-                      if (_formKey.currentState!.validate()) {
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
-                        );
-                      }
-                    },
+                    onPressed: () {},
                     child: const Text('Generate OTP'),
                   ),
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: () => {},
+                  child: const Text(
+                    'Back',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Color(0xff6D6E71)),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => {
+                    // Validate returns true if the form is valid, or false otherwise.
+                    if (_formKey.currentState!.validate())
+                      {
+                        dealerFormDetails(),
+                        // If the form is valid, display a snackbar. In the real world,
+                        // you'd often call a server or save the information in a database.
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Processing Data')),
+                        )
+                      }
+                  },
+                  child: const Text(
+                    'Next',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Color(0xffE31E30)),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
