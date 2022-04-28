@@ -141,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                           Row(
                             children: [
                               Container(
-                                width: 350,
+                                width: 330,
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
@@ -167,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           Row(children: const [
                             Center(
-                                widthFactor: 1.8,
+                                widthFactor: 1.7,
                                 heightFactor: 2,
                                 child: Text(
                                   'Get Associated with SCL >',
@@ -194,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                           Row(
                             children: [
                               Container(
-                                width: 350,
+                                width: 330,
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
