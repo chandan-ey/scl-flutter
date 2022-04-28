@@ -189,10 +189,10 @@ class _DealerDetailsState extends State<DealerDetails> {
                           items: dropdownItems,
                           onChanged: (value) {
                             setState(() {
-                              cityValue = value as String;
+                              stateValue = value as String;
                             });
                           },
-                          value: cityValue,
+                          value: stateValue,
                           validator: (value) {
                             if (value == null) {
                               return 'Please select state.';
@@ -252,10 +252,10 @@ class _DealerDetailsState extends State<DealerDetails> {
                           },
                           onChanged: (value) {
                             setState(() {
-                              talukaValue = value as String;
+                              districtValue = value as String;
                             });
                           },
-                          value: talukaValue,
+                          value: districtValue,
                           itemHeight: 40,
                           itemPadding:
                               const EdgeInsets.symmetric(horizontal: 8.0),
@@ -310,10 +310,10 @@ class _DealerDetailsState extends State<DealerDetails> {
                           },
                           onChanged: (value) {
                             setState(() {
-                              districtValue = value as String;
+                              talukaValue = value as String;
                             });
                           },
-                          value: districtValue,
+                          value: talukaValue,
                           itemHeight: 40,
                           itemPadding:
                               const EdgeInsets.symmetric(horizontal: 8.0),
@@ -368,10 +368,10 @@ class _DealerDetailsState extends State<DealerDetails> {
                           },
                           onChanged: (value) {
                             setState(() {
-                              stateValue = value as String;
+                              cityValue = value as String;
                             });
                           },
-                          value: stateValue,
+                          value: cityValue,
                           itemHeight: 40,
                           itemPadding:
                               const EdgeInsets.symmetric(horizontal: 8.0),
@@ -439,6 +439,8 @@ class _DealerDetailsState extends State<DealerDetails> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter email address.';
+                    } else if (!_isEmailValid(value)) {
+                      return 'Please enter valid email address.';
                     }
                     return null;
                   },
@@ -651,6 +653,13 @@ class _DealerDetailsState extends State<DealerDetails> {
         ),
       ),
     );
+  }
+
+  bool _isEmailValid(String value) {
+    bool emailValid = RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(value);
+    return emailValid;
   }
 
   void _checkPassword(String value) {
