@@ -163,7 +163,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                           value: cityValue,
                           validator: (value) {
                             if (value == null) {
-                              return 'Please select city.';
+                              return 'Please select state.';
                             }
                           },
                           itemHeight: 40,
@@ -215,7 +215,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                           items: dropdownItems,
                           validator: (value) {
                             if (value == null) {
-                              return 'Please select taluka.';
+                              return 'Please select district.';
                             }
                           },
                           onChanged: (value) {
@@ -273,7 +273,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                           items: dropdownItems,
                           validator: (value) {
                             if (value == null) {
-                              return 'Please select district.';
+                              return 'Please select taluka.';
                             }
                           },
                           onChanged: (value) {
@@ -331,7 +331,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                           items: dropdownItems,
                           validator: (value) {
                             if (value == null) {
-                              return 'Please select state.';
+                              return 'Please select city.';
                             }
                           },
                           onChanged: (value) {

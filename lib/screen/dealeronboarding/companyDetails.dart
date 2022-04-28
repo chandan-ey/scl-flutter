@@ -266,16 +266,17 @@ class _CompanyDetailsState extends State<CompanyDetails> {
             children: [
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                child: const Text(
-                  'Company',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.left,
-                ),
+                child: const Text(''),
+                // const Text(
+                //   '',
+                //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                //   textAlign: TextAlign.left,
+                // ),
               ),
               TextFormField(
                 controller: TextEditingController(text: company),
                 decoration: const InputDecoration(
+                  labelText: 'Partner Name',
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   border: OutlineInputBorder(),
                   contentPadding:
@@ -285,7 +286,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter Company.';
+                    return 'Please enter Partner Name.';
                   }
                   return null;
                 },
@@ -302,16 +303,17 @@ class _CompanyDetailsState extends State<CompanyDetails> {
             children: [
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                child: const Text(
-                  'Partnership',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.left,
-                ),
+                child: const Text(''),
+                // const Text(
+                //   '',
+                //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                //   textAlign: TextAlign.left,
+                //),
               ),
               TextFormField(
                 controller: TextEditingController(text: partner),
                 decoration: const InputDecoration(
+                  labelText: 'Relationship',
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   border: OutlineInputBorder(),
                   contentPadding:
@@ -321,7 +323,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter partnership.';
+                    return 'Please enter Relationship.';
                   }
                   return null;
                 },
