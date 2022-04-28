@@ -124,7 +124,11 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
                   ),
                   Step(
                     title: new Text(''),
-                    content: const CompanyDetails(),
+                    content: CompanyDetails(
+                      parentfunc: (int number) {
+                        goToStep(number);
+                      },
+                    ),
                     isActive: _currentStep >= 0,
                     state: _currentStep >= 1
                         ? StepState.complete
@@ -132,7 +136,11 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
                   ),
                   Step(
                     title: new Text(''),
-                    content: const BusinessDetails(),
+                    content: BusinessDetails(
+                      parentfunc: (int number) {
+                        goToStep(number);
+                      },
+                    ),
                     isActive: _currentStep >= 0,
                     state: _currentStep >= 2
                         ? StepState.complete
@@ -140,7 +148,11 @@ class _OnBoardOnePageState extends State<OnBoardOnePage> {
                   ),
                   Step(
                     title: new Text(''),
-                    content: const FinancialInfo(),
+                    content: FinancialInfo(
+                      parentfunc: (int number) {
+                        goToStep(number);
+                      },
+                    ),
                     isActive: _currentStep >= 0,
                     state: _currentStep >= 3
                         ? StepState.complete

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import '../dialog/companyDetailsDialog.dart';
+import '/screen/dealeronboarding/step1.dart';
 
 class CompanyDetails extends StatefulWidget {
-  const CompanyDetails({Key? key}) : super(key: key);
+  const CompanyDetails({Key? key, required this.parentfunc}) : super(key: key);
+  final parentFunctionCallback parentfunc;
+
   @override
   State<CompanyDetails> createState() => _CompanyDetailsState();
 }
@@ -251,6 +254,37 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                 ],
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: () => {widget.parentfunc(0)},
+                  child: const Text(
+                    'Back',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Color(0xff6D6E71)),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => {widget.parentfunc(2)},
+                  child: const Text(
+                    'Next',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Color(0xffE31E30)),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
