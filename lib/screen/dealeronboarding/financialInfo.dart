@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../dialog/nomineeDetailsDialog.dart';
 //import 'package:file_picker/file_picker.dart';
 import '/screen/dealeronboarding/step1.dart';
+import '../dialog/dealerOnboardingSuccessDialog.dart';
 
 class FinancialInfo extends StatefulWidget {
   const FinancialInfo({Key? key, required this.parentfunc}) : super(key: key);
@@ -381,7 +382,19 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () => {},
+                  onPressed: () => {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const AlertDialog(
+                            scrollable: true,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(32.0))),
+                            content: DealerOnboardingSuccessDialog(),
+                          );
+                        })
+                  },
                   child: const Text(
                     'Submit',
                     style: TextStyle(
