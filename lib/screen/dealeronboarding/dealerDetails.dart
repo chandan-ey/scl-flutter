@@ -47,19 +47,19 @@ class _DealerDetailsState extends State<DealerDetails> {
       const SnackBar(content: Text('Saving Data...')),
     );
     Map formData = {
-      'dealerName': _dealerName.text,
-      'address1': _addressLine1.text,
-      'address2': _addressLine2.text,
-      'pincode': _pincode.text,
+      'name': _dealerName.text,
+      'line1': _addressLine1.text,
+      'line2': _addressLine2.text,
+      'pinCode': _pincode.text,
       'email': _email.text,
-      'contactNumber': _contactnumber.text,
+      'mobileNo': _contactnumber.text,
       'referralCode': _referralcode.text,
       'password': _password.text,
       'confirmPassword': _confirmPassword.text,
-      'state': stateValue,
-      'district': districtValue,
-      'taluka': talukaValue,
-      'city': cityValue
+      'stateCode': stateValue,
+      'districtCode': districtValue,
+      'talukaCode': talukaValue,
+      'cityCode': cityValue
     };
     print(formData);
     return true;
