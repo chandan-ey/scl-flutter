@@ -55,7 +55,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                 width: double.infinity,
                 padding: const EdgeInsets.fromLTRB(2, 14, 0, 10),
                 child: const Text(
-                  'Brand Wise Sale',
+                  'Monthly Brand Wise Sale',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.left,
                 ),
@@ -106,7 +106,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                   width: double.infinity,
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                   child: const Text(
-                    'Warehouse Space',
+                    'Warehouse Capacity',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -118,7 +118,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
-                    labelText: 'Space in sq. feet',
+                    labelText: 'Qty in MT that can be stored',
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
                     filled: true,
@@ -130,7 +130,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter warehouse space.';
+                      return 'Please enter warehouse capacity.';
                     }
                     return null;
                   },
@@ -377,7 +377,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
-                    labelText: 'No. of Vehicles',
+                    labelText: 'Number of Vehicles',
                     contentPadding: EdgeInsets.symmetric(
                       vertical: 16.0,
                       horizontal: 10.0,
@@ -391,7 +391,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter no. of vehicles.';
+                      return 'Please enter number of vehicles.';
                     }
                     return null;
                   },
