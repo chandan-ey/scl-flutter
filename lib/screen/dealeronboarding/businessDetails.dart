@@ -13,24 +13,15 @@ class BusinessDetails extends StatefulWidget {
 class _BusinessDetailsState extends State<BusinessDetails> {
   String brandErrorMsg = '';
   String? brandName, vehicleType;
-  List<DropdownMenuItem<String>> get brandList {
-    List<DropdownMenuItem<String>> menuItems = [
-      const DropdownMenuItem(child: Text("USA"), value: "USA"),
-      const DropdownMenuItem(child: Text("Canada"), value: "Canada"),
-      const DropdownMenuItem(child: Text("Brazil"), value: "Brazil"),
-      const DropdownMenuItem(child: Text("England"), value: "England"),
-    ];
-    return menuItems;
-  }
 
-  List<DropdownMenuItem<String>> get vehicleTypes {
-    List<DropdownMenuItem<String>> menuItems = [
-      const DropdownMenuItem(child: Text("Truck"), value: "Truck"),
-      const DropdownMenuItem(child: Text("Bus"), value: "Bus"),
-      const DropdownMenuItem(child: Text("Car"), value: "Car"),
-    ];
-    return menuItems;
-  }
+  static List<String> BrandItems = ['Brand1', 'Brand2', 'Brand3'];
+  static var seen = Set<String>();
+  List<String> BrandItemslist =
+      BrandItems.where((element) => seen.add(element)).toList();
+
+  static List<String> VehicleDetailItems = ['car', 'bus', 'truck'];
+  List<String> VehicleItemslist =
+      VehicleDetailItems.where((element) => seen.add(element)).toList();
 
   final TextEditingController _warehouseSpace = TextEditingController();
 
@@ -300,13 +291,19 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                     ),
                     color: Colors.white,
                   ),
-                  items: brandList,
                   validator: (value) {
                     if (value == null) {
                       return 'Please select Brand.';
                     }
                   },
-                  value: brandWiseSaleItems[index]['brandCode'],
+                  value: BrandItemslist[getUniqueValue(
+                      brandWiseSaleItems[index]['brandCode'], BrandItems)],
+                  items: BrandItemslist.map((e) {
+                    return DropdownMenuItem(
+                      child: Text(e),
+                      value: e,
+                    );
+                  }).toList(),
                   itemHeight: 40,
                   itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
                 ),
@@ -326,6 +323,8 @@ class _BusinessDetailsState extends State<BusinessDetails> {
               ),
               DropdownButtonHideUnderline(
                 child: TextFormField(
+                  controller: TextEditingController(
+                      text: brandWiseSaleItems[index]['saleInMT']),
                   keyboardType: TextInputType.number,
                   onChanged: (value) =>
                       {updateBrandData(index, value, 'saleInMT')},
@@ -386,13 +385,19 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                     ),
                     color: Colors.white,
                   ),
-                  items: vehicleTypes,
+                  value: VehicleItemslist[getUniqueValue(
+                      vehicleItems[index]['vehicleType'], VehicleDetailItems)],
+                  items: VehicleItemslist.map((e) {
+                    return DropdownMenuItem(
+                      child: Text(e),
+                      value: e,
+                    );
+                  }).toList(),
                   validator: (value) {
                     if (value == null) {
                       return 'Please select vehicle type.';
                     }
                   },
-                  value: vehicleType[index]['vehicleType'],
                   itemHeight: 40,
                   itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
                 ),
@@ -412,6 +417,8 @@ class _BusinessDetailsState extends State<BusinessDetails> {
               ),
               DropdownButtonHideUnderline(
                 child: TextFormField(
+                  controller: TextEditingController(
+                      text: vehicleItems[index]['noOfVehicles']),
                   onChanged: (value) =>
                       {updateVehicleData(index, value, 'noOfVehicles')},
                   keyboardType: TextInputType.number,
@@ -454,6 +461,15 @@ class _BusinessDetailsState extends State<BusinessDetails> {
 
   updateBrandData(index, value, key) {
     brandWiseSaleItems[index][key] = value;
+  }
+
+  getUniqueValue(String value, List list) {
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] == value) {
+        return i;
+      }
+    }
+    return 0;
   }
 
   appendVehicleData(Map data) {
