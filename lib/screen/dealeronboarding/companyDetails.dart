@@ -26,31 +26,13 @@ class _CompanyDetailsState extends State<CompanyDetails> {
     return menuItems;
   }
 
-  List companyData = [
-    {
-      'director': 'john',
-      'fathername': 'william',
-      'address': 'new street',
-      'pan': 'AWEP786TY67',
-      'din': '123',
-      'banker': 'rbi'
-    },
-    {
-      'director': 'john',
-      'fathername': 'william',
-      'address': 'new street',
-      'pan': 'AWEP786TY67',
-      'din': '123',
-      'banker': 'rbi'
-    }
-  ];
+  List companyData = [];
 
   List items = [
     {'company': '', 'partner': ''}
   ];
 
   addItems() {
-    print(items);
     setState(() {
       items.add({'company': '', 'partner': ''});
     });
@@ -227,8 +209,8 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                       shrinkWrap: true,
                       itemCount: items.length,
                       itemBuilder: (context, index) {
-                        return dynamicList(
-                            items[index]['company'], items[index]['partner']);
+                        return dynamicList(items[index]['company'],
+                            items[index]['partner'], index);
                       },
                     ),
                   ),
@@ -288,7 +270,10 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () => {widget.parentfunc(2)},
+                  onPressed: () => {
+                    widget.parentfunc(2)
+                    //  print(items)
+                  },
                   child: const Text(
                     'Next',
                     style: TextStyle(
@@ -308,7 +293,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
     );
   }
 
-  Widget dynamicList(company, partner) {
+  Widget dynamicList(company, partner, index) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -326,6 +311,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
               ),
               TextFormField(
                 controller: TextEditingController(text: company),
+                onChanged: (value) => {updateData(index, value, 'company')},
                 decoration: const InputDecoration(
                   labelText: 'Partner Name',
                   floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -363,6 +349,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
               ),
               TextFormField(
                 controller: TextEditingController(text: partner),
+                onChanged: (value) => {updateData(index, value, 'partner')},
                 decoration: const InputDecoration(
                   labelText: 'Relationship',
                   floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -391,5 +378,9 @@ class _CompanyDetailsState extends State<CompanyDetails> {
     setState(() {
       companyData.add(data);
     });
+  }
+
+  updateData(index, value, key) {
+    items[index][key] = value;
   }
 }
