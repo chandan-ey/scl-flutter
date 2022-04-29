@@ -1,8 +1,12 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../dialog/nomineeDetailsDialog.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 //import 'package:file_picker/file_picker.dart';
 import '/screen/dealeronboarding/step1.dart';
 import '../dialog/dealerOnboardingSuccessDialog.dart';
+import '../../service/states_service.dart';
 
 class FinancialInfo extends StatefulWidget {
   const FinancialInfo({Key? key, required this.parentfunc}) : super(key: key);
@@ -12,7 +16,33 @@ class FinancialInfo extends StatefulWidget {
 }
 
 class _FinancialInfoState extends State<FinancialInfo> {
+  String? stateValue;
   bool agree = false;
+
+  final statesService _statesService = statesService();
+
+  @override
+  void initState() {
+    super.initState();
+    // states = _statesService.getState();
+    Timer(Duration(seconds: 3), () {
+      loadStateDropdown();
+    });
+  }
+
+  List<DropdownMenuItem<String>> stateMenuItems = [];
+
+  loadStateDropdown() async {
+    final post = await _statesService.getState();
+    print(post);
+
+    setState(() {
+      for (var i = 0; i < post.length; i++) {
+        stateMenuItems.add(DropdownMenuItem(
+            child: Text(post[i]['name']), value: post[i]['name']));
+      }
+    });
+  }
 
   pickFiles() async {
     /* FilePickerResult? result = await FilePicker.platform
@@ -94,22 +124,40 @@ class _FinancialInfoState extends State<FinancialInfo> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    border: OutlineInputBorder(),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
-                    filled: true,
-                    fillColor: Colors.white,
+                DropdownButtonHideUnderline(
+                  child: DropdownButtonFormField2(
+                    decoration: const InputDecoration.collapsed(hintText: ''),
+                    isExpanded: true,
+                    hint: const Text(
+                      'Select State',
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                      textAlign: TextAlign.left,
+                    ),
+                    buttonHeight: 53,
+                    buttonWidth: 170,
+                    buttonPadding: const EdgeInsets.only(left: 14, right: 14),
+                    buttonDecoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                        color: Colors.grey,
+                      ),
+                      color: Colors.white,
+                    ),
+                    items: stateMenuItems,
+                    onChanged: (value) {
+                      setState(() {
+                        stateValue = value as String;
+                      });
+                    },
+                    value: stateValue,
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Please select state.';
+                      }
+                    },
+                    itemHeight: 40,
+                    itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
                   ),
-                  style: TextStyle(fontSize: 16.0, color: Colors.black),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter Registration';
-                    }
-                    return null;
-                  },
                 ),
               ],
             ),

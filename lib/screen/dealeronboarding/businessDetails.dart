@@ -11,36 +11,61 @@ class BusinessDetails extends StatefulWidget {
 }
 
 class _BusinessDetailsState extends State<BusinessDetails> {
-  String? cityValue, talukaValue, districtValue, stateValue;
-  List<DropdownMenuItem<String>> get dropdownItems {
+  String brandErrorMsg = '';
+  String? brandName, vehicleType;
+  List<DropdownMenuItem<String>> get brandList {
     List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(child: Text("USA"), value: "USA"),
-      DropdownMenuItem(child: Text("Canada"), value: "Canada"),
-      DropdownMenuItem(child: Text("Brazil"), value: "Brazil"),
-      DropdownMenuItem(child: Text("England"), value: "England"),
+      const DropdownMenuItem(child: Text("USA"), value: "USA"),
+      const DropdownMenuItem(child: Text("Canada"), value: "Canada"),
+      const DropdownMenuItem(child: Text("Brazil"), value: "Brazil"),
+      const DropdownMenuItem(child: Text("England"), value: "England"),
     ];
     return menuItems;
   }
 
+  List<DropdownMenuItem<String>> get vehicleTypes {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(child: Text("Truck"), value: "Truck"),
+      const DropdownMenuItem(child: Text("Bus"), value: "Bus"),
+      const DropdownMenuItem(child: Text("Car"), value: "Car"),
+    ];
+    return menuItems;
+  }
+
+  final TextEditingController _warehouseSpace = TextEditingController();
+
   List brandWiseSaleItems = [
-    {'brand': '', 'sale': ''},
-    {'brand': '', 'sale': ''}
+    {'brandCode': '', 'saleInMT': ''}
   ];
 
   addBrandSaleItems() {
     setState(() {
-      brandWiseSaleItems.add({'brand': '', 'sale': ''});
+      brandWiseSaleItems.add({'brandCode': '', 'saleInMT': ''});
     });
   }
 
   List vehicleItems = [
-    {'type': '', 'count': ''}
+    {'vehicleType': '', 'noOfVehicles': ''}
   ];
 
   addVehicleItems() {
     setState(() {
-      vehicleItems.add({'type': '', 'count': ''});
+      vehicleItems.add({'vehicleType': '', 'noOfVehicles': ''});
     });
+  }
+
+  bool businessDetailsRequest() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Saving Data...')),
+    );
+    Map formData = {
+      'code': null,
+      'brandWiseSale': brandWiseSaleItems,
+      'storage': vehicleItems,
+      'warehouseSpace': _warehouseSpace.text,
+    };
+    print(formData);
+    return true;
   }
 
   @override
@@ -66,8 +91,10 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                 shrinkWrap: true,
                 itemCount: brandWiseSaleItems.length,
                 itemBuilder: (context, index) {
-                  return dynamicBrandList(brandWiseSaleItems[index]['brand'],
-                      brandWiseSaleItems[index]['sale']);
+                  return dynamicBrandList(
+                      brandWiseSaleItems[index]['brandCode'],
+                      brandWiseSaleItems[index]['saleInMT'],
+                      index);
                 },
               ),
             ),
@@ -114,6 +141,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                   ),
                 ),
                 TextFormField(
+                  controller: _warehouseSpace,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -153,8 +181,10 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                 shrinkWrap: true,
                 itemCount: vehicleItems.length,
                 itemBuilder: (context, index) {
-                  return dynamicTransportList(vehicleItems[index]['type'],
-                      vehicleItems[index]['count']);
+                  return dynamicTransportList(
+                      vehicleItems[index]['vehicleType'],
+                      vehicleItems[index]['noOfVehicles'],
+                      index);
                 },
               ),
             ),
@@ -204,7 +234,21 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () => {widget.parentfunc(3)},
+                  onPressed: () => {
+                    if (isFormValid())
+                      {
+                        if (businessDetailsRequest())
+                          {widget.parentfunc(3)}
+                        else
+                          {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text('Server Error! Please Try Again.')),
+                            )
+                          }
+                      }
+                  },
                   child: const Text(
                     'Next',
                     style: TextStyle(
@@ -224,7 +268,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
     );
   }
 
-  Widget dynamicBrandList(brandName, sale) {
+  Widget dynamicBrandList(brandName, sale, index) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -238,6 +282,8 @@ class _BusinessDetailsState extends State<BusinessDetails> {
               DropdownButtonHideUnderline(
                 child: DropdownButtonFormField2(
                   decoration: const InputDecoration.collapsed(hintText: ''),
+                  onChanged: (value) =>
+                      {updateBrandData(index, value, 'brandCode')},
                   isExpanded: true,
                   hint: const Text(
                     'Choose Brand',
@@ -254,18 +300,13 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                     ),
                     color: Colors.white,
                   ),
-                  items: dropdownItems,
+                  items: brandList,
                   validator: (value) {
                     if (value == null) {
                       return 'Please select Brand.';
                     }
                   },
-                  onChanged: (value) {
-                    setState(() {
-                      cityValue = value as String;
-                    });
-                  },
-                  value: cityValue,
+                  value: brandWiseSaleItems[index]['brandCode'],
                   itemHeight: 40,
                   itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
                 ),
@@ -286,6 +327,8 @@ class _BusinessDetailsState extends State<BusinessDetails> {
               DropdownButtonHideUnderline(
                 child: TextFormField(
                   keyboardType: TextInputType.number,
+                  onChanged: (value) =>
+                      {updateBrandData(index, value, 'saleInMT')},
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -311,7 +354,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
     );
   }
 
-  Widget dynamicTransportList(vehicleType, count) {
+  Widget dynamicTransportList(vehicleType, count, index) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -325,6 +368,8 @@ class _BusinessDetailsState extends State<BusinessDetails> {
               DropdownButtonHideUnderline(
                 child: DropdownButtonFormField2(
                   decoration: const InputDecoration.collapsed(hintText: ''),
+                  onChanged: (value) =>
+                      {updateVehicleData(index, value, 'vehicleType')},
                   isExpanded: true,
                   hint: const Text(
                     'Vehicle Type',
@@ -341,18 +386,13 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                     ),
                     color: Colors.white,
                   ),
-                  items: dropdownItems,
+                  items: vehicleTypes,
                   validator: (value) {
                     if (value == null) {
                       return 'Please select vehicle type.';
                     }
                   },
-                  onChanged: (value) {
-                    setState(() {
-                      districtValue = value as String;
-                    });
-                  },
-                  value: districtValue,
+                  value: vehicleType[index]['vehicleType'],
                   itemHeight: 40,
                   itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
                 ),
@@ -372,6 +412,8 @@ class _BusinessDetailsState extends State<BusinessDetails> {
               ),
               DropdownButtonHideUnderline(
                 child: TextFormField(
+                  onChanged: (value) =>
+                      {updateVehicleData(index, value, 'noOfVehicles')},
                   keyboardType: TextInputType.number,
                   // margin: EdgeInsets.fromLTRB(0,15,0,0),
                   decoration: const InputDecoration(
@@ -402,5 +444,32 @@ class _BusinessDetailsState extends State<BusinessDetails> {
         ),
       ],
     );
+  }
+
+  appendBrandData(Map data) {
+    setState(() {
+      brandWiseSaleItems.add(data);
+    });
+  }
+
+  updateBrandData(index, value, key) {
+    brandWiseSaleItems[index][key] = value;
+  }
+
+  appendVehicleData(Map data) {
+    setState(() {
+      vehicleItems.add(data);
+    });
+  }
+
+  updateVehicleData(index, value, key) {
+    vehicleItems[index][key] = value;
+  }
+
+  bool isFormValid() {
+    setState(() {
+      brandErrorMsg = '';
+    });
+    return true;
   }
 }

@@ -19,7 +19,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
   bool companyApplicant = true;
   String? statusValue = 'Company';
   String companyErrorMsg = '';
-  List<DropdownMenuItem<String>> get dropdownItems {
+  List<DropdownMenuItem<String>> get dealerCompanyType {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(child: Text("Company"), value: "Company"),
       const DropdownMenuItem(child: Text("Partnership"), value: "Partnership"),
@@ -103,7 +103,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                       ),
                       color: Colors.white,
                     ),
-                    items: dropdownItems,
+                    items: dealerCompanyType,
                     validator: (value) {
                       if (value == null) {
                         return 'Please select company type.';
@@ -352,11 +352,6 @@ class _CompanyDetailsState extends State<CompanyDetails> {
               Container(
                 width: double.infinity,
                 child: const Text(''),
-                // const Text(
-                //   '',
-                //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                //   textAlign: TextAlign.left,
-                // ),
               ),
               TextFormField(
                 controller: TextEditingController(text: partner),
@@ -391,11 +386,6 @@ class _CompanyDetailsState extends State<CompanyDetails> {
               Container(
                 width: double.infinity,
                 child: const Text(''),
-                // const Text(
-                //   '',
-                //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                //   textAlign: TextAlign.left,
-                //),
               ),
               TextFormField(
                 controller: TextEditingController(text: relationship),
