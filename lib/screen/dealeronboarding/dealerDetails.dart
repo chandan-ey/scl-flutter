@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:scl_android/screen/dealeronboarding/step1.dart';
+import '../../service/states_service.dart';
 
 class DealerDetails extends StatefulWidget {
   DealerDetails({Key? key, required this.parentfunc}) : super(key: key);
@@ -12,13 +15,16 @@ class DealerDetails extends StatefulWidget {
 
 class _DealerDetailsState extends State<DealerDetails> {
   String? cityValue, talukaValue, districtValue, stateValue;
-  late String _password1;
-  double _strength = 0;
+  //late String _password1;
+  //double _strength = 0;
 
+  final statesService _statesService = statesService();
+
+  List states = [];
   RegExp numReg = RegExp(r".*[0-9].*");
   RegExp letterReg = RegExp(r".*[A-Za-z].*");
 
-  String _displayText = 'Please enter a password';
+  //String _displayText = 'Please enter a password';
 
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
@@ -37,10 +43,19 @@ class _DealerDetailsState extends State<DealerDetails> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _contactnumber = TextEditingController();
   final TextEditingController _referralcode = TextEditingController();
-  final TextEditingController _password = TextEditingController();
-  final TextEditingController _confirmPassword = TextEditingController();
+  //final TextEditingController _password = TextEditingController();
+  //final TextEditingController _confirmPassword = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    // states = _statesService.getState();
+    Timer(Duration(seconds: 3), () {
+      print("Yeah, this line is printed after 3 seconds");
+    });
+  }
 
   bool dealerFormDetails() {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -54,8 +69,6 @@ class _DealerDetailsState extends State<DealerDetails> {
       'email': _email.text,
       'mobileNo': _contactnumber.text,
       'referralCode': _referralcode.text,
-      'password': _password.text,
-      'confirmPassword': _confirmPassword.text,
       'stateCode': stateValue,
       'districtCode': districtValue,
       'talukaCode': talukaValue,
@@ -507,7 +520,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                 ),
               ],
             ),
-            Column(
+            /* Column(
               children: [
                 Container(
                   width: double.infinity,
@@ -590,7 +603,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   },
                 ),
               ],
-            ),
+            ), */
             Column(
               children: [
                 Container(
@@ -604,7 +617,9 @@ class _DealerDetailsState extends State<DealerDetails> {
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      print(_statesService.getState());
+                    },
                     child: const Text('Generate OTP'),
                   ),
                 ),
@@ -670,7 +685,7 @@ class _DealerDetailsState extends State<DealerDetails> {
     return emailValid;
   }
 
-  void _checkPassword(String value) {
+  /* void _checkPassword(String value) {
     _password1 = value.trim();
 
     if (_password1.isEmpty) {
@@ -701,5 +716,7 @@ class _DealerDetailsState extends State<DealerDetails> {
         });
       }
     }
-  }
+  } */
 }
+
+mixin async {}
