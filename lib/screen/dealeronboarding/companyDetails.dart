@@ -18,6 +18,7 @@ class CompanyDetails extends StatefulWidget {
 class _CompanyDetailsState extends State<CompanyDetails> {
   bool companyApplicant = true;
   String? statusValue = 'Company';
+  String companyErrorMsg = '';
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(child: Text("Company"), value: "Company"),
@@ -28,13 +29,13 @@ class _CompanyDetailsState extends State<CompanyDetails> {
 
   List companyData = [];
 
-  List items = [
-    {'company': '', 'partner': ''}
+  List partnerData = [
+    {'nameOfPartner': '', 'relation': ''}
   ];
 
   addItems() {
     setState(() {
-      items.add({'company': '', 'partner': ''});
+      partnerData.add({'nameOfPartner': '', 'relation': ''});
     });
   }
 
@@ -42,10 +43,28 @@ class _CompanyDetailsState extends State<CompanyDetails> {
     setState(() {
       if (statusValue == 'Company') {
         companyApplicant = true;
+        partnerData = [
+          {'nameOfPartner': '', 'relation': ''}
+        ];
       } else {
         companyApplicant = false;
+        companyData = [];
       }
+      companyErrorMsg = '';
     });
+  }
+
+  bool companyDetailsRequest() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Saving Data...')),
+    );
+    Map formData = {
+      'code': null,
+      'companies': companyData,
+      'partnerships': partnerData,
+    };
+    print(formData);
+    return true;
   }
 
   @override
@@ -145,16 +164,29 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                               return null; // Use default value for other states and odd rows.
                             }),
                             cells: <DataCell>[
-                              DataCell(Text(companyData[index]['director'])),
-                              DataCell(Text(companyData[index]['fathername'])),
-                              DataCell(Text(companyData[index]['fathername'])),
-                              DataCell(Text(companyData[index]['pan'])),
-                              DataCell(Text(companyData[index]['din'])),
+                              DataCell(
+                                  Text(companyData[index]['nameOfDirector'])),
+                              DataCell(Text(companyData[index]['fathersName'])),
+                              DataCell(Text(companyData[index]['address'])),
+                              DataCell(Text(companyData[index]['panNo'])),
+                              DataCell(Text(companyData[index]['dinNo'])),
                               DataCell(Text(companyData[index]['banker']))
                             ]),
                       ),
                     ),
                   )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: Text(
+                          companyErrorMsg,
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      )
+                    ],
+                  ),
                   Row(
                     children: [
                       TextButton(
@@ -207,24 +239,33 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                   Container(
                     child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: items.length,
+                      itemCount: partnerData.length,
                       itemBuilder: (context, index) {
-                        return dynamicList(items[index]['company'],
-                            items[index]['partner'], index);
+                        return dynamicList(partnerData[index]['nameOfPartner'],
+                            partnerData[index]['relation'], index);
                       },
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                        child: Text(
+                          companyErrorMsg,
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      )
+                    ],
                   ),
                   Row(
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: addItems,
                         child: Row(
                           children: [
                             Container(
-                                margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
                                 padding: const EdgeInsets.all(10),
                                 decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
@@ -235,15 +276,12 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                                   style: TextStyle(
                                       fontSize: 20, color: Colors.white),
                                 )),
-                            TextButton(
-                              onPressed: addItems,
-                              child: const Text(
-                                'Add Line',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.grey),
-                              ),
+                            const Text(
+                              'Add Line',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.grey),
                             ),
                           ],
                         ),
@@ -271,8 +309,19 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                 ),
                 TextButton(
                   onPressed: () => {
-                    widget.parentfunc(2)
-                    //  print(items)
+                    if (isFormValid())
+                      {
+                        if (companyDetailsRequest())
+                          {widget.parentfunc(2)}
+                        else
+                          {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text('Server Error! Please Try Again.')),
+                            )
+                          }
+                      }
                   },
                   child: const Text(
                     'Next',
@@ -293,7 +342,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
     );
   }
 
-  Widget dynamicList(company, partner, index) {
+  Widget dynamicList(partner, relationship, index) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -310,8 +359,9 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                 // ),
               ),
               TextFormField(
-                controller: TextEditingController(text: company),
-                onChanged: (value) => {updateData(index, value, 'company')},
+                controller: TextEditingController(text: partner),
+                onChanged: (value) =>
+                    {updateData(index, value, 'nameOfPartner')},
                 decoration: const InputDecoration(
                   labelText: 'Partner Name',
                   floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -348,8 +398,8 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                 //),
               ),
               TextFormField(
-                controller: TextEditingController(text: partner),
-                onChanged: (value) => {updateData(index, value, 'partner')},
+                controller: TextEditingController(text: relationship),
+                onChanged: (value) => {updateData(index, value, 'relation')},
                 decoration: const InputDecoration(
                   labelText: 'Relationship',
                   floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -381,6 +431,39 @@ class _CompanyDetailsState extends State<CompanyDetails> {
   }
 
   updateData(index, value, key) {
-    items[index][key] = value;
+    partnerData[index][key] = value;
+  }
+
+  bool isFormValid() {
+    setState(() {
+      companyErrorMsg = '';
+    });
+    if (companyApplicant) {
+      if (companyData.length == 0) {
+        setState(() {
+          companyErrorMsg = 'Please Enter Atleast One Company Details.';
+        });
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      if (partnerData[0]['nameOfPartner'] == '') {
+        setState(() {
+          companyErrorMsg = 'Please Enter Atleast One Partner Details.';
+        });
+        return false;
+      }
+      for (int i = 0; i < partnerData.length; i++) {
+        if (partnerData[i]['nameOfPartner'] != '' &&
+            partnerData[i]['relation'] == '') {
+          setState(() {
+            companyErrorMsg = 'Please Enter Relation Ship for partner.';
+          });
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }

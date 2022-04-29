@@ -42,8 +42,10 @@ class _DealerDetailsState extends State<DealerDetails> {
 
   final _formKey = GlobalKey<FormState>();
 
-  dealerFormDetails() {
-    widget.parentfunc(1);
+  bool dealerFormDetails() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Saving Data...')),
+    );
     Map formData = {
       'dealerName': _dealerName.text,
       'address1': _addressLine1.text,
@@ -60,6 +62,7 @@ class _DealerDetailsState extends State<DealerDetails> {
       'city': cityValue
     };
     print(formData);
+    return true;
   }
 
   @override
@@ -626,14 +629,19 @@ class _DealerDetailsState extends State<DealerDetails> {
                 TextButton(
                   onPressed: () => {
                     // Validate returns true if the form is valid, or false otherwise.
+                    //dealerFormDetails(),
                     if (_formKey.currentState!.validate())
                       {
-                        dealerFormDetails(),
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
-                        )
+                        if (dealerFormDetails())
+                          {widget.parentfunc(1)}
+                        else
+                          {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text('Server Error! Please Try Again.')),
+                            )
+                          }
                       }
                   },
                   child: const Text(

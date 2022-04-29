@@ -250,12 +250,14 @@ class _CompanyDetailsDialog extends State<CompanyDetailsDialog> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             Map formData = {
-                              'director': _director.text,
-                              'fathername': _father.text,
+                              'nameOfDirector': _director.text,
+                              'fathersName': _father.text,
                               'address': _address.text,
-                              'pan': _pan.text,
-                              'din': _din.text,
-                              'banker': _banker.text
+                              'panNo': _pan.text,
+                              'dinNo': _din.text,
+                              'banker': _banker.text,
+                              'companyID': '',
+                              'uiStatus': 'NEW'
                             };
                             widget.dialogcallback(formData);
                             Navigator.of(context, rootNavigator: true)
