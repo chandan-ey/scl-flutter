@@ -26,6 +26,28 @@ class _DealerDetailsState extends State<DealerDetails> {
 
   //String _displayText = 'Please enter a password';
 
+  @override
+  void initState() {
+    super.initState();
+    // states = _statesService.getState();
+    Timer(Duration(seconds: 3), () {
+      loadStateDropdown();
+    });
+  }
+
+  List<DropdownMenuItem<String>> stateMenuItems = [];
+
+  loadStateDropdown() async {
+    final post = await _statesService.getState();
+
+    setState(() {
+      for (var i = 0; i < post.length; i++) {
+        stateMenuItems.add(DropdownMenuItem(
+            child: Text(post[i]['name']), value: post[i]['name']));
+      }
+    });
+  }
+
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
       const DropdownMenuItem(child: Text("USA"), value: "USA"),
@@ -47,15 +69,6 @@ class _DealerDetailsState extends State<DealerDetails> {
   //final TextEditingController _confirmPassword = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    super.initState();
-    // states = _statesService.getState();
-    Timer(Duration(seconds: 3), () {
-      print("Yeah, this line is printed after 3 seconds");
-    });
-  }
 
   bool dealerFormDetails() {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -202,7 +215,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                             ),
                             color: Colors.white,
                           ),
-                          items: dropdownItems,
+                          items: stateMenuItems,
                           onChanged: (value) {
                             setState(() {
                               stateValue = value as String;
@@ -618,7 +631,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                           fontWeight: FontWeight.bold,
                         )),
                     onPressed: () {
-                      print(_statesService.getState());
+                      loadStateDropdown();
                     },
                     child: const Text('Generate OTP'),
                   ),
