@@ -11,15 +11,34 @@ class BusinessDetails extends StatefulWidget {
 }
 
 class _BusinessDetailsState extends State<BusinessDetails> {
-  String brandErrorMsg = '';
+  String brandErrorMsg = '', wareHouseErrorMsg = '', vehicleErrorMsg = '';
   String? brandName, vehicleType;
 
-  static List<String> BrandItems = ['Brand1', 'Brand2', 'Brand3'];
+  void initState() {
+    super.initState();
+    setState(() {
+      brandErrorMsg = '';
+      wareHouseErrorMsg = '';
+      vehicleErrorMsg = '';
+    });
+  }
+
+  static List<String> BrandItems = [
+    'Select Brand',
+    'Brand1',
+    'Brand2',
+    'Brand3'
+  ];
   static var seen = Set<String>();
   List<String> BrandItemslist =
       BrandItems.where((element) => seen.add(element)).toList();
 
-  static List<String> VehicleDetailItems = ['car', 'bus', 'truck'];
+  static List<String> VehicleDetailItems = [
+    'Select Vehicle',
+    'Car',
+    'Bus',
+    'Truck'
+  ];
   List<String> VehicleItemslist =
       VehicleDetailItems.where((element) => seen.add(element)).toList();
 
@@ -90,6 +109,18 @@ class _BusinessDetailsState extends State<BusinessDetails> {
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child: Text(
+                    brandErrorMsg,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                )
+              ],
+            ),
+            Row(
               children: [
                 Container(
                     margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
@@ -156,6 +187,18 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child: Text(
+                    wareHouseErrorMsg,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                )
+              ],
+            ),
             Container(
               child: Container(
                 width: double.infinity,
@@ -178,6 +221,18 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                       index);
                 },
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child: Text(
+                    vehicleErrorMsg,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                )
+              ],
             ),
             Row(
               children: [
@@ -234,8 +289,9 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                           {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                  content:
-                                      Text('Server Error! Please Try Again.')),
+                                content:
+                                    Text('Server Error! Please Try Again.'),
+                              ),
                             )
                           }
                       }
@@ -337,7 +393,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                     filled: true,
                     fillColor: Colors.white,
                   ),
-                  style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 16.0, color: Colors.black),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter sale MT details.';
@@ -483,9 +539,55 @@ class _BusinessDetailsState extends State<BusinessDetails> {
   }
 
   bool isFormValid() {
+    bool validFlag = true;
     setState(() {
       brandErrorMsg = '';
+      wareHouseErrorMsg = '';
+      vehicleErrorMsg = '';
     });
-    return true;
+    if (_warehouseSpace.text == null || _warehouseSpace.text == '') {
+      wareHouseErrorMsg = 'Please enter warehouse capacity in SQMT';
+      validFlag = false;
+    }
+    if (brandWiseSaleItems[0]['brandCode'] == '') {
+      setState(() {
+        brandErrorMsg = 'Please Enter Atleast One Brand Details.';
+      });
+      validFlag = false;
+    }
+    for (int i = 0; i < brandWiseSaleItems.length; i++) {
+      if ((brandWiseSaleItems[i]['brandCode'] != '' &&
+              brandWiseSaleItems[i]['saleInMT'] == '') ||
+          (brandWiseSaleItems[i]['brandCode'] == '' &&
+              brandWiseSaleItems[i]['saleInMT'] != '')) {
+        setState(() {
+          brandErrorMsg = 'Please Enter Brand Details.';
+        });
+        validFlag = false;
+      }
+    }
+    print(vehicleItems.length);
+    if (vehicleItems[0]['vehicleType'] == '') {
+      setState(() {
+        vehicleErrorMsg = 'Please Enter Atleast One Vehicel Details.';
+      });
+      validFlag = false;
+    }
+    for (int i = 0; i < vehicleItems.length; i++) {
+      if ((vehicleItems[i]['vehicleType'] != '' &&
+              vehicleItems[i]['noOfVehicles'] == '') ||
+          (vehicleItems[i]['vehicleType'] == '' &&
+              vehicleItems[i]['noOfVehicles'] != '')) {
+        setState(() {
+          vehicleErrorMsg = 'Please Enter Vehicle Details.';
+        });
+        validFlag = false;
+      }
+    }
+    if (validFlag) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
