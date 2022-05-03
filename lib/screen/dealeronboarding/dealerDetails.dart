@@ -1,12 +1,11 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:scl_android/screen/dealeronboarding/step1.dart';
 import '../../service/states_service.dart';
 import '../login/login.dart';
+import 'package:localstorage/localstorage.dart';
 
 class DealerDetails extends StatefulWidget {
   const DealerDetails({Key? key, required this.parentfunc}) : super(key: key);
@@ -16,6 +15,7 @@ class DealerDetails extends StatefulWidget {
 }
 
 class _DealerDetailsState extends State<DealerDetails> {
+  final LocalStorage storage = LocalStorage('basicDetails');
   String? cityValue, talukaValue, districtValue, stateValue;
   //late String _password1;
   //double _strength = 0;
@@ -31,9 +31,31 @@ class _DealerDetailsState extends State<DealerDetails> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 1), () {
       loadStateDropdown();
+      _checkForValue();
     });
+  }
+
+  _checkForValue() {
+    Map savedData = storage.getItem('basicDetails');
+    if (savedData.isNotEmpty) {
+      setState(() {
+        _dealerName.text = savedData['name'];
+        _addressLine1.text = savedData['line1'];
+        _addressLine2.text = savedData['line2'];
+        _pincode.text = savedData['pinCode'];
+        _email.text = savedData['email'];
+        _contactnumber.text = savedData['mobileNo'];
+        stateValue = savedData['stateCode'];
+        loadDistrictDropdown(stateValue);
+        loadTalukaDropdown(savedData['districtCode']);
+        loadCityDropdown(savedData['talukaCode']);
+        districtValue = savedData['districtCode'];
+        talukaValue = savedData['talukaCode'];
+        cityValue = savedData['cityCode'];
+      });
+    }
   }
 
   List<DropdownMenuItem<String>> stateMenuItems = [];
@@ -115,17 +137,19 @@ class _DealerDetailsState extends State<DealerDetails> {
       'talukaCode': talukaValue,
       'cityCode': cityValue
     };
+    storage.setItem('basicDetails', formData);
     print(formData);
-    _statesService.postDealerData(formData).then((value) {
-      if (value == 'true') {
-        return true;
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(value)),
-        );
-        return false;
-      }
-    });
+    return true;
+    // _statesService.postDealerData(formData).then((value) {
+    //   if (value == 'true') {
+    //     return true;
+    //   } else {
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       SnackBar(content: Text(value)),
+    //     );
+    //     return false;
+    //   }
+    // });
   }
 
   generateOTP() {
@@ -677,6 +701,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                     onPressed: () {
                       // loadStateDropdown();
                       //showBottomDialog(context);
+                      dealerFormDetails();
                       showModalBottomSheet<void>(
                         // context and builder are
                         // required properties in this widget
@@ -686,12 +711,12 @@ class _DealerDetailsState extends State<DealerDetails> {
                           // we create center column and display text
                           return Container(
                             height: 250,
-                            padding: EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(20),
                             child: Center(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  Text(
+                                  const Text(
                                     'Confirm OTP',
                                     style: TextStyle(fontSize: 22),
                                   ),
@@ -770,8 +795,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                     // Validate returns true if the form is valid, or false otherwise.
                     if (_formKey.currentState!.validate())
                       {
-                        // if (dealerFormDetails()) {widget.parentfunc(1)}
-                        widget.parentfunc(1)
+                        if (dealerFormDetails()) {widget.parentfunc(1)}
                       }
                   },
                   child: const Text(
@@ -804,27 +828,16 @@ class _DealerDetailsState extends State<DealerDetails> {
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
-          title: Text(
+          title: const Text(
             'Details Saved Successfully',
             style: TextStyle(fontSize: 22),
           ),
           children: <Widget>[
-            SimpleDialogOption(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
-              child: const Text(
+            const SimpleDialogOption(
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 5),
+              child: Text(
                   'Your details have been captured successfully and sent for further processing.'
                   ' Meanwhile you may continue filling up the form'),
-              // onPressed: () {
-              //   final snackBar = SnackBar(
-              //     content: const Text('Yay! A SnackBar!'),
-              //     action: SnackBarAction(
-              //       label: 'Und',
-              //       onPressed: () {
-              //         // Some code to undo the change.
-              //       },
-              //     ),
-              //   );
-              // },
             ),
             Center(
               child: Container(
@@ -842,7 +855,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   },
                   child: const Text('Continue'),
                 ),
-                padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
               ),
             )
           ],

@@ -21,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _validate = false;
   bool _validMobile = false;
   bool _validOTP = false;
+  bool _validAssocation = true;
   validateMobile() {
     mobileNumberLength = mobileNoTextController.text.length;
     setState(() {
@@ -149,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                               Container(
-                                width: 290,
+                                width: 270,
                                 child: TextFormField(
                                   controller: mobileNoTextController,
                                   maxLength: 10,
@@ -173,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                           Row(
                             children: [
                               Container(
-                                width: 350,
+                                width: 320,
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
@@ -197,17 +198,31 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ],
                           ),
-                          Row(children: const [
-                            Center(
-                                widthFactor: 1.8,
-                                heightFactor: 2,
-                                child: Text(
-                                  'Get Associated with SCL >',
-                                  style: TextStyle(
-                                      color: Colors.white70,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600),
-                                ))
+                          Row(children: [
+                            Container(
+                              width: 320,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    // onPrimary: const Color(0xff000000),
+                                    primary: const Color(0x00ffffff),
+                                    textStyle: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color(0xff000000),
+                                    )),
+                                onPressed: () {
+                                  if (_validAssocation) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const HomePage(),
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: const Text('Get Associated with SCL >'),
+                              ),
+                            ),
                           ])
                         ]),
                         replacement: Column(children: [
@@ -226,7 +241,7 @@ class _LoginPageState extends State<LoginPage> {
                           Row(
                             children: [
                               Container(
-                                width: 350,
+                                width: 320,
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(

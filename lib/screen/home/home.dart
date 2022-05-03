@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Welcome Ajai Prakash'.tr,
+                          Text('Welcome'.tr,
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
