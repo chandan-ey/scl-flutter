@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../dialog/nomineeDetailsDialog.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 //import 'package:file_picker/file_picker.dart';
 import '/screen/dealeronboarding/step1.dart';
 import '../dialog/dealerOnboardingSuccessDialog.dart';
 import '../../service/states_service.dart';
+
+typedef nomineeDialogFunctionCallback = Function(Map nomineerow);
 
 class FinancialInfo extends StatefulWidget {
   const FinancialInfo({Key? key, required this.parentfunc}) : super(key: key);
@@ -16,8 +17,22 @@ class FinancialInfo extends StatefulWidget {
 }
 
 class _FinancialInfoState extends State<FinancialInfo> {
+  String panErrMsg = '',
+      gstErrMsg = '',
+      stateErrMsg = '',
+      accountNoErrMsg = '',
+      ifscErrMsg = '',
+      nominationErrMsg = '',
+      documentErrMsg = '',
+      acceptErrMsg = '';
   String? stateValue;
   bool agree = false;
+
+  final TextEditingController _panDetails = TextEditingController();
+  final TextEditingController _gstDetails = TextEditingController();
+  final TextEditingController _accNo = TextEditingController();
+  final TextEditingController _ifscCode = TextEditingController();
+  List nomineeData = [];
 
   final statesService _statesService = statesService();
 
@@ -25,7 +40,15 @@ class _FinancialInfoState extends State<FinancialInfo> {
   void initState() {
     super.initState();
     // states = _statesService.getState();
-    Timer(Duration(seconds: 3), () {
+    panErrMsg = '';
+    gstErrMsg = '';
+    stateErrMsg = '';
+    accountNoErrMsg = '';
+    ifscErrMsg = '';
+    nominationErrMsg = '';
+    documentErrMsg = '';
+    acceptErrMsg = '';
+    Timer(const Duration(seconds: 3), () {
       loadStateDropdown();
     });
   }
@@ -67,6 +90,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   ),
                 ),
                 TextFormField(
+                  controller: _panDetails,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -85,6 +109,18 @@ class _FinancialInfoState extends State<FinancialInfo> {
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child: Text(
+                    panErrMsg,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                )
+              ],
+            ),
             Column(
               children: [
                 Container(
@@ -96,6 +132,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   ),
                 ),
                 TextFormField(
+                  controller: _gstDetails,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -112,6 +149,18 @@ class _FinancialInfoState extends State<FinancialInfo> {
                     return null;
                   },
                 ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child: Text(
+                    gstErrMsg,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                )
               ],
             ),
             Column(
@@ -161,6 +210,18 @@ class _FinancialInfoState extends State<FinancialInfo> {
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child: Text(
+                    stateErrMsg,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                )
+              ],
+            ),
             Column(
               children: [
                 Container(
@@ -172,6 +233,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   ),
                 ),
                 TextFormField(
+                  controller: _accNo,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -191,6 +253,18 @@ class _FinancialInfoState extends State<FinancialInfo> {
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child: Text(
+                    accountNoErrMsg,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                )
+              ],
+            ),
             Column(
               children: [
                 Container(
@@ -202,6 +276,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                   ),
                 ),
                 TextFormField(
+                  controller: _ifscCode,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -218,6 +293,18 @@ class _FinancialInfoState extends State<FinancialInfo> {
                     return null;
                   },
                 ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child: Text(
+                    ifscErrMsg,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                )
               ],
             ),
             const SizedBox(height: 10),
@@ -252,31 +339,42 @@ class _FinancialInfoState extends State<FinancialInfo> {
                       DataColumn(label: Text('PAN No.')),
                       DataColumn(label: Text('Aadhar No.')),
                     ],
-                    rows: [
-                      DataRow(cells: [
-                        DataCell(Text('')),
-                        DataCell(Text('')),
-                        DataCell(Text('')),
-                        DataCell(Text('')),
-                        DataCell(Text('')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('')),
-                        DataCell(Text('')),
-                        DataCell(Text('')),
-                        DataCell(Text('')),
-                        DataCell(Text('')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('')),
-                        DataCell(Text('')),
-                        DataCell(Text('')),
-                        DataCell(Text('')),
-                        DataCell(Text('')),
-                      ]),
-                    ],
+                    rows: List<DataRow>.generate(
+                      nomineeData.length,
+                      (int index) => DataRow(
+                          color: MaterialStateProperty.resolveWith<Color?>(
+                              (Set<MaterialState> states) {
+                            // All rows will have the same selected color.
+                            if (states.contains(MaterialState.selected)) {
+                              return Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.08);
+                            }
+                            return null; // Use default value for other states and odd rows.
+                          }),
+                          cells: <DataCell>[
+                            DataCell(Text(nomineeData[index]['name'])),
+                            DataCell(Text(nomineeData[index]['fathersName'])),
+                            DataCell(Text(nomineeData[index]['relation'])),
+                            DataCell(Text(nomineeData[index]['panCard'])),
+                            DataCell(Text(nomineeData[index]['aadharCard'])),
+                          ]),
+                    ),
                   ),
                 )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      child: Text(
+                        nominationErrMsg,
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    )
+                  ],
+                ),
                 Row(
                   children: [
                     TextButton(
@@ -284,9 +382,15 @@ class _FinancialInfoState extends State<FinancialInfo> {
                         showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return const AlertDialog(
+                              return AlertDialog(
                                 scrollable: true,
-                                content: const NomineeDetailsDialog(),
+                                content: NomineeDetailsDialog(
+                                  dialogcallback: (Map nomineerow) {
+                                    setState(() {
+                                      nomineeData.add(nomineerow);
+                                    });
+                                  },
+                                ),
                               );
                             });
                       },
@@ -342,7 +446,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                           alignment: Alignment.topLeft,
                           child: new InkWell(
                               child: new Text(
-                                'Document 1',
+                                'Pan_card_document.pdf',
                                 style: TextStyle(),
                               ),
                               onTap: pickFiles),
@@ -351,7 +455,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                           alignment: Alignment.topLeft,
                           child: new InkWell(
                               child: new Text(
-                                'Document 2',
+                                'gst_2022_file.pdf',
                                 style: TextStyle(),
                               ),
                               onTap: pickFiles),
@@ -360,7 +464,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                           alignment: Alignment.topLeft,
                           child: new InkWell(
                               child: new Text(
-                                'Document 3',
+                                'blank_checques.pdf',
                                 style: TextStyle(),
                               ),
                               onTap: pickFiles),
@@ -369,7 +473,7 @@ class _FinancialInfoState extends State<FinancialInfo> {
                           alignment: Alignment.topLeft,
                           child: new InkWell(
                               child: new Text(
-                                'Document 4',
+                                'bank_statement_2022.pdf',
                                 style: TextStyle(),
                               ),
                               onTap: pickFiles),
@@ -410,6 +514,18 @@ class _FinancialInfoState extends State<FinancialInfo> {
                       style: TextStyle(fontSize: 12),
                     ),
                   ],
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child: Text(
+                    acceptErrMsg,
+                    style: TextStyle(color: Colors.red),
+                  ),
                 )
               ],
             ),
@@ -431,17 +547,20 @@ class _FinancialInfoState extends State<FinancialInfo> {
                 ),
                 TextButton(
                   onPressed: () => {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return const AlertDialog(
-                            scrollable: true,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(32.0))),
-                            content: DealerOnboardingSuccessDialog(),
-                          );
-                        })
+                    if (isFormValid())
+                      {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                scrollable: true,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(32.0))),
+                                content: DealerOnboardingSuccessDialog(),
+                              );
+                            })
+                      }
                   },
                   child: const Text(
                     'Submit',
@@ -460,5 +579,54 @@ class _FinancialInfoState extends State<FinancialInfo> {
         ),
       ),
     );
+  }
+
+  bool isFormValid() {
+    bool validFlag = true;
+    setState(() {
+      panErrMsg = '';
+      gstErrMsg = '';
+      stateErrMsg = '';
+      accountNoErrMsg = '';
+      ifscErrMsg = '';
+      nominationErrMsg = '';
+      documentErrMsg = '';
+      acceptErrMsg = '';
+    });
+    if (_panDetails.text == null || _panDetails.text == '') {
+      panErrMsg = 'Please enter Pan Details.';
+      validFlag = false;
+    }
+    if (_gstDetails.text == null || _gstDetails.text == '') {
+      gstErrMsg = 'Please enter GST Details.';
+      validFlag = false;
+    }
+    if (stateValue == null || stateValue == '') {
+      stateErrMsg = 'Please select state.';
+      validFlag = false;
+    }
+    if (_accNo.text == null || _accNo.text == '') {
+      accountNoErrMsg = 'Please select state.';
+      validFlag = false;
+    }
+    if (_ifscCode.text == null || _ifscCode.text == '') {
+      ifscErrMsg = 'Please enter IFSC code.';
+      validFlag = false;
+    }
+    if (nomineeData.isEmpty) {
+      setState(() {
+        nominationErrMsg = 'Please Enter Atleast One Company Details.';
+      });
+      validFlag = false;
+    }
+    if (!agree) {
+      acceptErrMsg = 'Please accept the terms & Conditions.';
+      validFlag = false;
+    }
+    if (validFlag) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

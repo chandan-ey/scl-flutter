@@ -116,7 +116,7 @@ class _DealerDetailsState extends State<DealerDetails> {
     print(formData);
     _statesService.postDealerData(formData).then((value) {
       if (value == 'true') {
-        widget.parentfunc(2);
+        return true;
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(value)),
@@ -166,7 +166,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                     return null;
                   },
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]')),
+                    FilteringTextInputFormatter.allow(RegExp('[a-zA-Z ]')),
                   ],
                 ),
               ],
@@ -697,8 +697,11 @@ class _DealerDetailsState extends State<DealerDetails> {
                 TextButton(
                   onPressed: () => {
                     // Validate returns true if the form is valid, or false otherwise.
-                    //dealerFormDetails(),
-                    if (_formKey.currentState!.validate()) {dealerFormDetails()}
+                    if (_formKey.currentState!.validate())
+                      {
+                        //if (dealerFormDetails()) {widget.parentfunc(1)}
+                        widget.parentfunc(1)
+                      }
                   },
                   child: const Text(
                     'Next',

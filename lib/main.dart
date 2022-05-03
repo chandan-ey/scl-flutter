@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'translation/LocaleString.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

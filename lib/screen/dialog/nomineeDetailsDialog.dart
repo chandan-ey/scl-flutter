@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../dealeronboarding/financialInfo.dart';
+
 class NomineeDetailsDialog extends StatefulWidget {
-  const NomineeDetailsDialog({Key? key}) : super(key: key);
+  NomineeDetailsDialog({Key? key, required this.dialogcallback})
+      : super(key: key);
+  nomineeDialogFunctionCallback dialogcallback;
   @override
   State<NomineeDetailsDialog> createState() => _NomineeDetailsDialog();
 }
 
 class _NomineeDetailsDialog extends State<NomineeDetailsDialog> {
   final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _nomineeName = TextEditingController();
+  final TextEditingController _father = TextEditingController();
+  final TextEditingController _relation = TextEditingController();
+  final TextEditingController _pan = TextEditingController();
+  final TextEditingController _aadhar = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -30,6 +41,7 @@ class _NomineeDetailsDialog extends State<NomineeDetailsDialog> {
                   ),
                 ),
                 TextFormField(
+                  controller: _nomineeName,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -62,6 +74,7 @@ class _NomineeDetailsDialog extends State<NomineeDetailsDialog> {
                   ),
                 ),
                 TextFormField(
+                  controller: _father,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -94,6 +107,7 @@ class _NomineeDetailsDialog extends State<NomineeDetailsDialog> {
                   ),
                 ),
                 TextFormField(
+                  controller: _relation,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -123,6 +137,7 @@ class _NomineeDetailsDialog extends State<NomineeDetailsDialog> {
                   ),
                 ),
                 TextFormField(
+                  controller: _pan,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -152,6 +167,7 @@ class _NomineeDetailsDialog extends State<NomineeDetailsDialog> {
                   ),
                 ),
                 TextFormField(
+                  controller: _aadhar,
                   decoration: const InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                     border: OutlineInputBorder(),
@@ -198,7 +214,20 @@ class _NomineeDetailsDialog extends State<NomineeDetailsDialog> {
                       ),
                       TextButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {}
+                          if (_formKey.currentState!.validate()) {
+                            Map formData = {
+                              'name': _nomineeName.text,
+                              'fathersName': _father.text,
+                              'relation': _relation.text,
+                              'panCard': _pan.text,
+                              'aadharCard': _aadhar.text,
+                              'nomineeID': '',
+                              'uiStatus': 'NEW'
+                            };
+                            widget.dialogcallback(formData);
+                            Navigator.of(context, rootNavigator: true)
+                                .pop('dialog');
+                          }
                         },
                         child: const Text(
                           'SAVE',

@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import '../home/home.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class DealerOnboardingSuccessDialog extends StatelessWidget {
   const DealerOnboardingSuccessDialog({Key? key}) : super(key: key);
+
+  final _storage = const FlutterSecureStorage();
+
+  void _addNewItem() async {
+    await _storage.write(key: 'status', value: 'underProcess');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +37,10 @@ class DealerOnboardingSuccessDialog extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
+              _addNewItem();
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => const HomePage()),
               );
             },
             child: const Text(

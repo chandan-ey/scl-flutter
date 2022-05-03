@@ -1,9 +1,8 @@
-// ignore_for_file: unnecessary_const
-
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import '../dialog/companyDetailsDialog.dart';
 import '/screen/dealeronboarding/step1.dart';
+import '../../service/states_service.dart';
 
 typedef companydialogFunctionCallback = Function(Map companyrow);
 
