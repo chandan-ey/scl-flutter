@@ -4,19 +4,11 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class statesService {
   static const baseURL =
       "https://api.ck3oh5xguk-shreeceme1-d1-public.model-t.cc.commerce.ondemand.com/occ/v2/powertools";
   static const token = 'toNh7F65NdbYa7muKF66dAamtSk';
-
-  final storage = new FlutterSecureStorage();
-
-  void storeToken() async {
-    await storage.write(key: 'token', value: token);
-  }
-
   getState() async {
     final ioc = new HttpClient();
     ioc.badCertificateCallback =

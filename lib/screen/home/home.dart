@@ -5,7 +5,6 @@ import '/screen/dealeronboarding/step1.dart';
 import '../drawer/drawer.dart';
 import 'package:get/get.dart';
 import '../../translation/LocaleString.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,18 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _storage = new FlutterSecureStorage();
   String appStatus = '';
-
-  loadStatus() async {
-    appStatus = (await _storage.read(key: 'status'))!;
-    print(appStatus);
-  }
-
-  void initState() {
-    super.initState();
-    loadStatus();
-  }
 
   String dropdownValue = 'EN';
   @override

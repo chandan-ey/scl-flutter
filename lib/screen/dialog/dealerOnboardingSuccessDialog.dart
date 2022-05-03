@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import '../home/home.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class DealerOnboardingSuccessDialog extends StatelessWidget {
   const DealerOnboardingSuccessDialog({Key? key}) : super(key: key);
-
-  final _storage = const FlutterSecureStorage();
-
-  void _addNewItem() async {
-    await _storage.write(key: 'status', value: 'underProcess');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +21,7 @@ class DealerOnboardingSuccessDialog extends StatelessWidget {
             height: 20,
           ),
           const Text(
-            'Thanks! We have recieved your application and we’ll be in touch really soon.',
+            'Thanks! We have recieved your application and we\'ll be in touch really soon.',
             style: TextStyle(fontSize: 12, color: Color(0xff49454F)),
             textAlign: TextAlign.left,
           ),
@@ -37,7 +30,6 @@ class DealerOnboardingSuccessDialog extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              _addNewItem();
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const HomePage()),
