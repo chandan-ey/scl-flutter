@@ -105,17 +105,10 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('welcomedealername'.tr,
+                          Text('Welcome Ajai Prakash'.tr,
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 18,
-                              )),
-                          Text('IDNumber'.tr,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w300,
                                 color: Colors.black,
                                 fontSize: 18,
                               )),

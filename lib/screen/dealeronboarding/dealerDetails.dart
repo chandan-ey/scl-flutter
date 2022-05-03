@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:scl_android/screen/dealeronboarding/step1.dart';
 import '../../service/states_service.dart';
+import '../login/login.dart';
 
 class DealerDetails extends StatefulWidget {
   const DealerDetails({Key? key, required this.parentfunc}) : super(key: key);
@@ -91,6 +92,7 @@ class _DealerDetailsState extends State<DealerDetails> {
   final TextEditingController _pincode = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _contactnumber = TextEditingController();
+  bool _validAssocation = true;
   //final TextEditingController _referralcode = TextEditingController();
   //final TextEditingController _password = TextEditingController();
   //final TextEditingController _confirmPassword = TextEditingController();
@@ -672,7 +674,76 @@ class _DealerDetailsState extends State<DealerDetails> {
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         )),
-                    onPressed: generateOTP,
+                    onPressed: () {
+                      // loadStateDropdown();
+                      //showBottomDialog(context);
+                      showModalBottomSheet<void>(
+                        // context and builder are
+                        // required properties in this widget
+                        context: context,
+                        builder: (BuildContext context) {
+                          // we set up a container inside which
+                          // we create center column and display text
+                          return Container(
+                            height: 250,
+                            padding: EdgeInsets.all(20),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    'Confirm OTP',
+                                    style: TextStyle(fontSize: 22),
+                                  ),
+                                  TextFormField(
+                                    decoration: const InputDecoration(
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.never,
+                                      border: OutlineInputBorder(),
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: 16.0, horizontal: 10.0),
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                    ),
+                                    style: const TextStyle(
+                                        fontSize: 16.0, color: Colors.black),
+                                  ),
+                                  Center(
+                                    child: Container(
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            primary: const Color(0xffFBBC33),
+                                            onPrimary: const Color(0xff000000),
+                                            textStyle: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                        onPressed: () {
+                                          showSimpleDialog(context);
+                                        },
+                                        child: const Text('Submit'),
+                                      ),
+                                      padding:
+                                          EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Container(
+                                      child: MaterialButton(
+                                        onPressed: () {
+                                          // showSimpleDialog(context);
+                                        },
+                                        child: const Text('Resend OTP'),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
                     child: const Text('Generate OTP'),
                   ),
                 ),
@@ -699,7 +770,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                     // Validate returns true if the form is valid, or false otherwise.
                     if (_formKey.currentState!.validate())
                       {
-                        //if (dealerFormDetails()) {widget.parentfunc(1)}
+                        // if (dealerFormDetails()) {widget.parentfunc(1)}
                         widget.parentfunc(1)
                       }
                   },
@@ -728,6 +799,55 @@ class _DealerDetailsState extends State<DealerDetails> {
         .hasMatch(value);
     return emailValid;
   }
+
+  void showSimpleDialog(BuildContext context) => showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: Text(
+            'Details Saved Successfully',
+            style: TextStyle(fontSize: 22),
+          ),
+          children: <Widget>[
+            SimpleDialogOption(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
+              child: const Text(
+                  'Your details have been captured successfully and sent for further processing.'
+                  ' Meanwhile you may continue filling up the form'),
+              // onPressed: () {
+              //   final snackBar = SnackBar(
+              //     content: const Text('Yay! A SnackBar!'),
+              //     action: SnackBarAction(
+              //       label: 'Und',
+              //       onPressed: () {
+              //         // Some code to undo the change.
+              //       },
+              //     ),
+              //   );
+              // },
+            ),
+            Center(
+              child: Container(
+                child: MaterialButton(
+                  textColor: Colors.green,
+                  onPressed: () {
+                    if (_validAssocation) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text('Continue'),
+                ),
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+              ),
+            )
+          ],
+        );
+      });
 
   /* void _checkPassword(String value) {
     _password1 = value.trim();

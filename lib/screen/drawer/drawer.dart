@@ -18,7 +18,7 @@ class _DrawerPageState extends State<DrawerPage> {
           color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
     ),
     accountEmail: new Text(
-      'tom@xxx.com',
+      '',
       style: TextStyle(color: Colors.black, fontSize: 14),
     ),
     currentAccountPicture: new CircleAvatar(
@@ -52,7 +52,7 @@ class _DrawerPageState extends State<DrawerPage> {
               },
             ),
             ListTile(
-              title: Text('Dealer Onboarding'),
+              title: Text('Apply For Dealership'),
               // leading: new CircleAvatar(
               //   child: new Text('B2'),
               // ),
