@@ -1,13 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:scl_android/screen/dealeronboarding/step1.dart';
 import '../../service/states_service.dart';
 
 class DealerDetails extends StatefulWidget {
-  DealerDetails({Key? key, required this.parentfunc}) : super(key: key);
+  const DealerDetails({Key? key, required this.parentfunc}) : super(key: key);
   final parentFunctionCallback parentfunc;
   @override
   State<DealerDetails> createState() => _DealerDetailsState();
@@ -29,13 +30,15 @@ class _DealerDetailsState extends State<DealerDetails> {
   @override
   void initState() {
     super.initState();
-    // states = _statesService.getState();
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       loadStateDropdown();
     });
   }
 
   List<DropdownMenuItem<String>> stateMenuItems = [];
+  List<DropdownMenuItem<String>> districtMenuItems = [];
+  List<DropdownMenuItem<String>> talukaMenuItems = [];
+  List<DropdownMenuItem<String>> cityMenuItems = [];
 
   loadStateDropdown() async {
     final post = await _statesService.getState();
@@ -43,19 +46,43 @@ class _DealerDetailsState extends State<DealerDetails> {
     setState(() {
       for (var i = 0; i < post.length; i++) {
         stateMenuItems.add(DropdownMenuItem(
-            child: Text(post[i]['name']), value: post[i]['name']));
+            child: Text(post[i]['name']), value: post[i]['isocode']));
       }
     });
   }
 
-  List<DropdownMenuItem<String>> get dropdownItems {
-    List<DropdownMenuItem<String>> menuItems = [
-      const DropdownMenuItem(child: Text("USA"), value: "USA"),
-      const DropdownMenuItem(child: Text("Canada"), value: "Canada"),
-      const DropdownMenuItem(child: Text("Brazil"), value: "Brazil"),
-      const DropdownMenuItem(child: Text("England"), value: "England"),
-    ];
-    return menuItems;
+  loadDistrictDropdown(stateId) async {
+    final post = await _statesService.getDistrict(stateId);
+
+    setState(() {
+      for (var i = 0; i < post.length; i++) {
+        districtMenuItems.add(DropdownMenuItem(
+            child: Text(post[i]['name']), value: post[i]['isocode']));
+      }
+    });
+  }
+
+  loadTalukaDropdown(districtId) async {
+    final post = await _statesService.getTaluka(districtId);
+    print(post);
+
+    setState(() {
+      for (var i = 0; i < post.length; i++) {
+        talukaMenuItems.add(DropdownMenuItem(
+            child: Text(post[i]['name']), value: post[i]['isocode']));
+      }
+    });
+  }
+
+  loadCityDropdown(talukaId) async {
+    final post = await _statesService.getCity(talukaId);
+
+    setState(() {
+      for (var i = 0; i < post.length; i++) {
+        cityMenuItems.add(DropdownMenuItem(
+            child: Text(post[i]['name']), value: post[i]['isocode']));
+      }
+    });
   }
 
   final TextEditingController _dealerName = TextEditingController();
@@ -64,13 +91,13 @@ class _DealerDetailsState extends State<DealerDetails> {
   final TextEditingController _pincode = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _contactnumber = TextEditingController();
-  final TextEditingController _referralcode = TextEditingController();
+  //final TextEditingController _referralcode = TextEditingController();
   //final TextEditingController _password = TextEditingController();
   //final TextEditingController _confirmPassword = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
-  bool dealerFormDetails() {
+  dealerFormDetails() {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Saving Data...')),
     );
@@ -81,14 +108,26 @@ class _DealerDetailsState extends State<DealerDetails> {
       'pinCode': _pincode.text,
       'email': _email.text,
       'mobileNo': _contactnumber.text,
-      'referralCode': _referralcode.text,
       'stateCode': stateValue,
       'districtCode': districtValue,
       'talukaCode': talukaValue,
       'cityCode': cityValue
     };
     print(formData);
-    return true;
+    _statesService.postDealerData(formData).then((value) {
+      if (value == 'true') {
+        widget.parentfunc(2);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(value)),
+        );
+        return false;
+      }
+    });
+  }
+
+  generateOTP() {
+    final mobileNo = _contactnumber.text;
   }
 
   @override
@@ -220,6 +259,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                             setState(() {
                               stateValue = value as String;
                             });
+                            loadDistrictDropdown(value);
                           },
                           value: stateValue,
                           validator: (value) {
@@ -273,7 +313,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                             ),
                             color: Colors.white,
                           ),
-                          items: dropdownItems,
+                          items: districtMenuItems,
                           validator: (value) {
                             if (value == null) {
                               return 'Please select district.';
@@ -283,6 +323,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                             setState(() {
                               districtValue = value as String;
                             });
+                            loadTalukaDropdown(value);
                           },
                           value: districtValue,
                           itemHeight: 40,
@@ -331,7 +372,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                             ),
                             color: Colors.white,
                           ),
-                          items: dropdownItems,
+                          items: talukaMenuItems,
                           validator: (value) {
                             if (value == null) {
                               return 'Please select taluka.';
@@ -341,6 +382,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                             setState(() {
                               talukaValue = value as String;
                             });
+                            loadCityDropdown(value);
                           },
                           value: talukaValue,
                           itemHeight: 40,
@@ -389,7 +431,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                             ),
                             color: Colors.white,
                           ),
-                          items: dropdownItems,
+                          items: cityMenuItems,
                           validator: (value) {
                             if (value == null) {
                               return 'Please select city.';
@@ -509,7 +551,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                 ),
               ],
             ),
-            Column(
+            /* Column(
               children: [
                 Container(
                   width: double.infinity,
@@ -533,7 +575,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                 ),
               ],
             ),
-            /* Column(
+            Column(
               children: [
                 Container(
                   width: double.infinity,
@@ -630,9 +672,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         )),
-                    onPressed: () {
-                      loadStateDropdown();
-                    },
+                    onPressed: generateOTP,
                     child: const Text('Generate OTP'),
                   ),
                 ),
@@ -658,19 +698,7 @@ class _DealerDetailsState extends State<DealerDetails> {
                   onPressed: () => {
                     // Validate returns true if the form is valid, or false otherwise.
                     //dealerFormDetails(),
-                    if (_formKey.currentState!.validate())
-                      {
-                        if (dealerFormDetails())
-                          {widget.parentfunc(1)}
-                        else
-                          {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content:
-                                      Text('Server Error! Please Try Again.')),
-                            )
-                          }
-                      }
+                    if (_formKey.currentState!.validate()) {dealerFormDetails()}
                   },
                   child: const Text(
                     'Next',
