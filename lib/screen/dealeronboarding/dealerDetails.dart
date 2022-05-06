@@ -33,29 +33,29 @@ class _DealerDetailsState extends State<DealerDetails> {
     super.initState();
     Timer(const Duration(seconds: 1), () {
       loadStateDropdown();
-      _checkForValue();
+      Map savedData = storage.getItem('basicDetails');
+      if (savedData.isNotEmpty) {
+        _checkForValue(savedData);
+      }
     });
   }
 
-  _checkForValue() {
-    Map savedData = storage.getItem('basicDetails');
-    if (savedData.isNotEmpty) {
-      setState(() {
-        _dealerName.text = savedData['name'];
-        _addressLine1.text = savedData['line1'];
-        _addressLine2.text = savedData['line2'];
-        _pincode.text = savedData['pinCode'];
-        _email.text = savedData['email'];
-        _contactnumber.text = savedData['mobileNo'];
-        stateValue = savedData['stateCode'];
-        loadDistrictDropdown(stateValue);
-        loadTalukaDropdown(savedData['districtCode']);
-        loadCityDropdown(savedData['talukaCode']);
-        districtValue = savedData['districtCode'];
-        talukaValue = savedData['talukaCode'];
-        cityValue = savedData['cityCode'];
-      });
-    }
+  _checkForValue(savedData) {
+    setState(() {
+      _dealerName.text = savedData['name'];
+      _addressLine1.text = savedData['line1'];
+      _addressLine2.text = savedData['line2'];
+      _pincode.text = savedData['pinCode'];
+      _email.text = savedData['email'];
+      _contactnumber.text = savedData['mobileNo'];
+      stateValue = savedData['stateCode'];
+      loadDistrictDropdown(stateValue);
+      loadTalukaDropdown(savedData['districtCode']);
+      loadCityDropdown(savedData['talukaCode']);
+      districtValue = savedData['districtCode'];
+      talukaValue = savedData['talukaCode'];
+      cityValue = savedData['cityCode'];
+    });
   }
 
   List<DropdownMenuItem<String>> stateMenuItems = [];

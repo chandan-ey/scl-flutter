@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       translations: LocaleString(),
-      locale: Locale('en', 'US'),
+      locale: const Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
       title: 'Shree Cements',
       theme: ThemeData(primarySwatch: Colors.red, fontFamily: 'Roboto'),
