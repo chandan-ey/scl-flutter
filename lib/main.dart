@@ -17,13 +17,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       translations: LocaleString(),
-      locale: const Locale('en', 'US'),
+      locale: Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
       title: 'Shree Cements',
       theme: ThemeData(primarySwatch: Colors.red, fontFamily: 'Roboto'),
       routes: {
         '/': (context) => const LoginPage(),
-        '/home': (context) => const HomePage(),
+        '/home': (context) => const HomePage(homepagemode: ''),
         '/onboardone': ((context) => const OnBoardOnePage())
       },
       initialRoute: '/',

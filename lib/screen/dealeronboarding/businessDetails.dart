@@ -29,6 +29,15 @@ class _BusinessDetailsState extends State<BusinessDetails> {
     'Brand2',
     'Brand3'
   ];
+  List<DropdownMenuItem<String>> get dropdownItems {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(child: Text("USA"), value: "USA"),
+      const DropdownMenuItem(child: Text("Canada"), value: "Canada"),
+      const DropdownMenuItem(child: Text("Brazil"), value: "Brazil"),
+      const DropdownMenuItem(child: Text("England"), value: "England"),
+    ];
+    return menuItems;
+  }
   static var seen = Set<String>();
   List<String> BrandItemslist =
       BrandItems.where((element) => seen.add(element)).toList();
@@ -281,7 +290,8 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                 ),
                 TextButton(
                   onPressed: () => {
-                    if (isFormValid())
+                    widget.parentfunc(3),
+                   /* if (isFormValid())
                       {
                         if (businessDetailsRequest())
                           {widget.parentfunc(3)}
@@ -294,7 +304,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                               ),
                             )
                           }
-                      }
+                      } */
                   },
                   child: const Text(
                     'Next',
@@ -352,14 +362,19 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                       return 'Please select Brand.';
                     }
                   },
-                  value: BrandItemslist[getUniqueValue(
-                      brandWiseSaleItems[index]['brandCode'], BrandItems)],
-                  items: BrandItemslist.map((e) {
+              //    value: BrandItemslist[getUniqueValue(
+              //        brandWiseSaleItems[index]['brandCode'], BrandItems)],
+
+                  items:dropdownItems,
+
+
+
+                 /* items: BrandItemslist.map((e) {
                     return DropdownMenuItem(
                       child: Text(e),
                       value: e,
                     );
-                  }).toList(),
+                  }).toList(), */
                   itemHeight: 40,
                   itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
                 ),
@@ -441,8 +456,8 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                     ),
                     color: Colors.white,
                   ),
-                  value: VehicleItemslist[getUniqueValue(
-                      vehicleItems[index]['vehicleType'], VehicleDetailItems)],
+                 // value: VehicleItemslist[getUniqueValue(
+                   //   vehicleItems[index]['vehicleType'], VehicleDetailItems)],
                   items: VehicleItemslist.map((e) {
                     return DropdownMenuItem(
                       child: Text(e),

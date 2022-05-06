@@ -32,7 +32,7 @@ class DealerOnboardingSuccessDialog extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
+                MaterialPageRoute(builder: (context) => const HomePage(homepagemode: 'underprogress')),
               );
             },
             child: const Text(

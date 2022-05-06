@@ -7,7 +7,8 @@ import 'package:get/get.dart';
 import '../../translation/LocaleString.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final String homepagemode;
+  const HomePage({Key? key, required this.homepagemode}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -146,6 +147,9 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
+          Visibility(
+            visible: widget.homepagemode == "",
+            child:
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: const Color(0xffE31E30),
@@ -160,7 +164,8 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(
                               builder: (context) => new OnBoardOnePage()));
                     },
-                    child: Text('apply'.tr))
+                    child: Text('apply'.tr)),
+            replacement: Text('Your Application is under progress'),)
               ],
             )
             // child: Text('Welcome'.tr,

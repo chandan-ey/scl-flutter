@@ -19,7 +19,7 @@ class _DealerDetailsState extends State<DealerDetails> {
   String? cityValue, talukaValue, districtValue, stateValue;
   //late String _password1;
   //double _strength = 0;
-
+bool firstTimeUser = true;
   final statesService _statesService = statesService();
 
   List states = [];
@@ -33,29 +33,30 @@ class _DealerDetailsState extends State<DealerDetails> {
     super.initState();
     Timer(const Duration(seconds: 1), () {
       loadStateDropdown();
-      Map savedData = storage.getItem('basicDetails');
-      if (savedData.isNotEmpty) {
-        _checkForValue(savedData);
-      }
+      _checkForValue();
     });
   }
 
-  _checkForValue(savedData) {
-    setState(() {
-      _dealerName.text = savedData['name'];
-      _addressLine1.text = savedData['line1'];
-      _addressLine2.text = savedData['line2'];
-      _pincode.text = savedData['pinCode'];
-      _email.text = savedData['email'];
-      _contactnumber.text = savedData['mobileNo'];
-      stateValue = savedData['stateCode'];
-      loadDistrictDropdown(stateValue);
-      loadTalukaDropdown(savedData['districtCode']);
-      loadCityDropdown(savedData['talukaCode']);
-      districtValue = savedData['districtCode'];
-      talukaValue = savedData['talukaCode'];
-      cityValue = savedData['cityCode'];
-    });
+  _checkForValue() {
+    Map savedData = storage.getItem('basicDetails');
+    if (savedData.isNotEmpty) {
+      firstTimeUser = false;
+      setState(() {
+        _dealerName.text = savedData['name'];
+        _addressLine1.text = savedData['line1'];
+        _addressLine2.text = savedData['line2'];
+        _pincode.text = savedData['pinCode'];
+        _email.text = savedData['email'];
+        _contactnumber.text = savedData['mobileNo'];
+        stateValue = savedData['stateCode'];
+        loadDistrictDropdown(stateValue);
+        loadTalukaDropdown(savedData['districtCode']);
+        loadCityDropdown(savedData['talukaCode']);
+        districtValue = savedData['districtCode'];
+        talukaValue = savedData['talukaCode'];
+        cityValue = savedData['cityCode'];
+      });
+    }
   }
 
   List<DropdownMenuItem<String>> stateMenuItems = [];
@@ -690,7 +691,9 @@ class _DealerDetailsState extends State<DealerDetails> {
                 Container(
                   width: 200,
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                  child: ElevatedButton(
+                  child: Visibility(
+                    visible: firstTimeUser,
+                    child:ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: const Color(0xffFBBC33),
                         onPrimary: const Color(0xff000000),
@@ -769,8 +772,10 @@ class _DealerDetailsState extends State<DealerDetails> {
                         },
                       );
                     },
-                    child: const Text('Generate OTP'),
+                    child: const Text('Submit'),
                   ),
+                    replacement: Text("")
+                    ),
                 ),
               ],
             ),
@@ -790,25 +795,29 @@ class _DealerDetailsState extends State<DealerDetails> {
                         MaterialStateProperty.all<Color>(Color(0xff6D6E71)),
                   ),
                 ),
-                TextButton(
-                  onPressed: () => {
-                    // Validate returns true if the form is valid, or false otherwise.
-                    if (_formKey.currentState!.validate())
-                      {
-                        if (dealerFormDetails()) {widget.parentfunc(1)}
-                      }
-                  },
-                  child: const Text(
-                    'Next',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Color(0xffE31E30)),
-                  ),
-                ),
+                 Visibility(
+                  visible: firstTimeUser,
+                  child: Text(""),
+                   replacement: TextButton(
+    onPressed: () => {
+    // Validate returns true if the form is valid, or false otherwise.
+    if (_formKey.currentState!.validate())
+    {
+    if (dealerFormDetails()) {widget.parentfunc(1)}
+    }
+    },
+    child: const Text(
+    'Next',
+    style: TextStyle(
+    color: Colors.white,
+    ),
+    ),
+    style: ButtonStyle(
+    backgroundColor:
+    MaterialStateProperty.all<Color>(Color(0xffE31E30)),
+    ),
+    ),
+                 ),
               ],
             )
           ],
